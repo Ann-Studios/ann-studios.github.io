@@ -16,8 +16,6 @@ function getRandomWebsiteOneLiner() {
     return websiteRelatedOneLiners[randomIndex];
 }
 
-// Rest of the code remains the same
-
 function updateCountdown() {
     const endDate = new Date("2024-03-30T00:00:00").getTime();
     const now = new Date().getTime();
