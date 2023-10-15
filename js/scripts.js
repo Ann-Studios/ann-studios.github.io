@@ -1,5 +1,4 @@
 // countdown.js
-// countdown.js
 
 const websiteRelatedOneLiners = [
     "We're sprucing up. Stay tuned for the makeover!",
@@ -30,6 +29,9 @@ function updateCountdown() {
     document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
     document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
     document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+
+    const websiteOneLiner = getRandomWebsiteOneLiner();
+    document.getElementById("website-one-liner").textContent = websiteOneLiner;
 }
 
 setInterval(updateCountdown, 1000);
