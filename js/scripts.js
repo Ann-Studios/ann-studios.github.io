@@ -10,9 +10,11 @@ const websiteRelatedOneLiners = [
     "Don't worry, we'll be back with a fresh look!",
 ];
 
-function getRandomWebsiteOneLiner() {
-    const randomIndex = Math.floor(Math.random() * websiteRelatedOneLiners.length);
-    return websiteRelatedOneLiners[randomIndex];
+let currentIndex = 0;
+
+function displayWebsiteOneLiner() {
+    document.getElementById("website-one-liner").textContent = websiteRelatedOneLiners[currentIndex];
+    currentIndex = (currentIndex + 1) % websiteRelatedOneLiners.length;
 }
 
 function updateCountdown() {
@@ -29,9 +31,7 @@ function updateCountdown() {
     document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
     document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
     document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
-
-    const websiteOneLiner = getRandomWebsiteOneLiner();
-    document.getElementById("website-one-liner").textContent = websiteOneLiner;
 }
 
 setInterval(updateCountdown, 1000);
+setInterval(displayWebsiteOneLiner, 5000);
