@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;700&family=Cabin+Sketch:wght@400;700&family=Cabin:wght@400;500;700&family=Quicksand:wght@300;400;500;700&display=swap');
+
+/*topnav*/
+.topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    color: white;
+    padding: 10px;
+    top: 0;
+    left: 0;
+    font-family: 'Assistant', sans-serif;
+    font-weight: bold;
+}
+
+.logo img {
+    height: 70px;
+}
+
+.links {
+    display: flex;
+}
+
+.link {
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+/* carousel*/
+.carousel img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/*removing extra space*/
+body {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-family: 'Cabin', sans-serif;
+}
+
+main {
+    margin: 0;
+}
+
+#footer-email {
+    height: 50px;
+    width: 250px;
+    border-radius: 30px;
+    border: 1px #fff solid;
+    background-color: transparent;
+    margin-right: -60px;
+    color:#fff;
+}
+
+::placeholder {
+    color: #fff;
+}
+
+#subscribe {
+    height: 50px;
+    width: 250px;
+    border-radius: 30px;
+    border: none;
+    color:#e51b23;
+}
+
+#instagram-icon #tiktok-icon {
+    height: 50px;
+    width: 50px;
+}
+
+#games-section-title {
+    text-align: center;
+    color:#e51b23;
+    font-family: 'Cabin', sans-serif;
+}
+
+/* games section*/
+#games-section-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    place-items: center;
+}
+
+#games-section {
+    background-color: #000000;
+    color: #fff;
+}
+
+/* game card*/
+#game-card img {
+    width: 250px;
+    height: 273px;
+    padding: 2px;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: 10px;
+}
+
+#game-card button {
+    background-color: #000000;
+    border: 2px solid;
+    color: #ffffff;
+    border-radius: 20px;
+}
+
+#news {
+    margin: 40px;
+}
+
+#footer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: #e51b23;
+    color: #fff;
+    font-family: 'Cabin Sketch', sans-serif;
+}
+
+#footer-card {
+    margin: 20px;
+}
