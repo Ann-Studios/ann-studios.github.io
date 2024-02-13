@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ann Studios</title>
+    <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/site.css">
     <script src="./js/site.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="./imgs/favicon_io/apple-touch-icon.png">
@@ -11,67 +13,79 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./imgs/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="./imgs/favicon_io/site.webmanifest">
 </head>
+
 <body>
     <!--top navbar-->
     <nav class="topnav">
         <div class="logo">
-            <img src="./imgs/ann_studios_logo.png" alt="Logo">
+            <a href="./site.html">
+                <img src="./imgs/ann_studios_logo.png" alt="Logo"></a>
         </div>
         <div class="links">
-            <a href="#" class="link">Home</a>
-            <a href="#" class="link">About</a>
-            <a href="#" class="link">Games</a>
-            <a href="#" class="link">Blog</a>
-            <a href="#" class="link">Contact</a>
-            <a href="#" class="link">Log in</a>
+            <a href="./about/about.html" class="link">About</a>
+            <div class="dropdown">
+                <a href="#" class="link">Games</a>
+                <div class="dropdown-content">
+                    <a href="#">Love Letter</a>
+                    <a href="#">Pumpkin Smash</a>
+                    <a href="#">Run Turkey Run</a>
+                    <a href="#">Present Panic</a>
+                    <a href="#">Firework Frenzy</a>
+                    <a href="#">Egg Hunt</a>
+                </div>
+            </div>
+            <a href="./blog/blog.html" class="link">Blog</a>
+            <a href="contact/contact.html" class="link">Contact</a>
+            <a href="#" class="link login">Log in</a>
         </div>
     </nav>
     <div class="carousel">
         <img src="./imgs/starting village 1.jpg" alt="Carousel Image">
+        <div class="overlay"></div>
     </div>
     <main>
         <section id="games-section">
-        <h1 id="games-section-title">Games</h1>
-        <div id="games-section-container">
-            <div id="game-card">
-                <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
-                <p><strong>Love Letter</strong></p>
-                <button>Go to game page</button>
+            <h1 id="games-section-title">Games</h1>
+            <div id="games-section-container">
+                <div id="game-card">
+                    <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
+                    <p id="game-card-title">Love Letter</p>
+
+                </div>
+                <div id="game-card">
+                    <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
+                    <p id="game-card-title">Pumpkin Smash</p>
+
+                </div>
+                <div id="game-card">
+                    <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
+                    <p id="game-card-title">Run Turkey Run</p>
+
+                </div>
+                <div id="game-card">
+                    <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
+                    <p id="game-card-title">Present Panic</p>
+
+                </div>
+                <div id="game-card">
+                    <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
+                    <p id="game-card-title">Firework Frenzy</p>
+
+                </div>
+                <div id="game-card">
+                    <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
+                    <p id="game-card-title">Egg Hunt</p>
+
+                </div>
             </div>
-            <div id="game-card">
-                <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
-                <p><strong>Pumpkin Smash</strong></p>
-                <button>Go to game page</button>
-            </div>
-            <div id="game-card">
-                <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
-                <p><strong>Run Turkey Run</strong></p>
-                <button>Go to game page</button>
-            </div>
-            <div id="game-card">
-                <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
-                <p><strong>Present Panic</strong></p>
-                <button>Go to game page</button>
-            </div>
-            <div id="game-card">
-                <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
-                <p><strong>Firework Frenzy</strong></p>
-                <button>Go to game page</button>
-            </div>
-            <div id="game-card">
-                <img src="./imgs/starting village 1.jpg" alt="Game Card Image">
-                <p><strong>Egg Hunt</strong></p>
-                <button>Go to game page</button>
-            </div>
-        </div>
         </section>
     </main>
     <footer>
         <div id="footer-grid">
             <div id="footer-card">
                 <h4>Newsletter</h4>
-                </div>
-                <div id="news">
+            </div>
+            <div id="news">
                 <form action="#" method="post">
                     <input id="footer-email" type="email" name="email" placeholder="Your email address" required>
                     <button type="submit" id="subscribe">Subscribe</button>
@@ -79,13 +93,15 @@
             </div>
             <div id="footer-card">
                 <h4>Contact Us</h4>
-                </div>
-                <div id="footer-card">
-                    <p>Email: contact@annstudios.games</p>
-                    <p>Phone: +(123)4567890</p><img src="./imgs/Group 4.png" alt="instagram-icon" id="instagram-icon">
-                    <img src="./imgs/Group 5.png" alt="tiktok-icon" id="tiktok-icon">
-                </div>
+            </div>
+            <div id="footer-card">
+                <p>Email: contact@annstudios.games <br> Phone: +(123)4567890</p>
+                <img src="./imgs/Group 4.png" alt="instagram-icon" id="instagram-icon">
+                <img src="./imgs/Group 5.png" alt="tiktok-icon" id="tiktok-icon"></p>
+            </div>
+            <p class="copyright">© 2024 Ann Studios. All rights reserved.</p>
         </div>
     </footer>
 </body>
+
 </html>

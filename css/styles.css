@@ -1,0 +1,199 @@
+/* styles for all pages*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*topnav*/
+.topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    color: white;
+    padding: 10px;
+    top: 0;
+    left: 0;
+    font-family: 'Assistant', sans-serif;
+    font-weight: bold;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: flex;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #000000;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #e51b23;
+    color: #ffffff;
+}
+
+/* Show the dropdown content when hovering over the dropdown */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.logo img {
+    height: 70px;
+}
+
+.links {
+    display: flex;
+}
+
+.link {
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    margin: 10px;
+}
+
+.login {
+    border: 1px solid none;
+    height: 40px;
+    width: 110px;
+    border-radius: 20px;
+    background-color: #e51b23;
+    text-align: center;
+}
+
+#subscribe {
+    height: 50px;
+    width: 250px;
+    border-radius: 40px;
+    border: none;
+    color: #e51b23;
+}
+
+#instagram-icon,
+#tiktok-icon {
+    height: 50px;
+    width: 50px;
+}
+
+#footer-email {
+    height: 50px;
+    width: 250px;
+    border-radius: 30px;
+    border: 1px #fff solid;
+    background-color: transparent;
+    margin-right: -60px;
+    color: #fff;
+}
+
+::placeholder {
+    color: #fff;
+}
+
+#news {
+    margin: 40px;
+}
+
+#footer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: #e51b23;
+    color: #fff;
+    font-family: 'Cabin Sketch', sans-serif;
+}
+
+#footer-card {
+    margin: 20px;
+}
+
+#news {
+    margin: 40px;
+}
+
+.copyright {
+    text-align: center;
+}
+
+/* For screens smaller than 768px (typical smartphones) */
+@media (max-width: 767px) {
+    .topnav {
+        flex-direction: column;
+        /* Stack items vertically */
+        align-items: flex-start;
+        /* Align items to the start */
+    }
+
+    .logo img {
+        margin-bottom: 10px;
+        /* Add some space below the logo */
+    }
+
+    .links {
+        margin-top: 10px;
+        /* Add some space above the links */
+    }
+
+    .link {
+        padding: 5px;
+        /* Reduce padding */
+    }
+
+    #games-section-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* Adjust grid columns */
+    }
+
+    #game-card img {
+        width: 100%;
+        /* Make images fill the container */
+        height: auto;
+        /* Allow images to scale proportionally */
+    }
+}
+
+/* For screens smaller than 1024px (tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .topnav {
+        padding: 5px;
+        /* Reduce padding */
+    }
+
+    .link {
+        padding: 8px;
+        /* Adjust padding */
+    }
+}
+
+/* For screens larger than 1024px (desktops) */
+@media (min-width: 1024px) {
+    .topnav {
+        padding: 15px;
+        /* Increase padding */
+    }
+
+    .link {
+        padding: 12px;
+        /* Increase padding */
+    }
+
+    #games-section-container {
+        gap: 10px;
+        /* Adjust gap between game cards */
+    }
+}
