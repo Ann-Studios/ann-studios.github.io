@@ -319,8 +319,3 @@ button {
 .download-btn:hover {
     background-color: #45a049;
 }
-
-.favicon {
-    /*round the favicon*/
-    border-radius: 50%;
-}
