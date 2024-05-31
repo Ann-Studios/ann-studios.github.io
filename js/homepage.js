@@ -52,11 +52,43 @@ thumbnails.forEach((thumbnail, index) => {
     })
 })
 
-//function to go to a certain webpage after clicking on text
-function goToPageSeaLord() {
-    window.location.href = "./games/The Sea Lord/tsl.html";
+// Function to handle the modal popup for each game
+function openModal(gameName) {
+    // Get the corresponding modal element
+    var modal = document.getElementById(gameName + "Modal");
+
+    // Display the modal
+    modal.style.display = "block";
+
+    // Get the close button inside the modal
+    var closeButton = modal.querySelector('.close');
+
+    // When the user clicks on the close button, close the modal
+    closeButton.addEventListener('click', function () {
+        modal.style.display = "none";
+    });
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.addEventListener('click', function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
 }
 
-function goToPageLaurie() {
-    window.location.href = "./games/Laurie/Laurie.html";
-}
+// Wait for the DOM to be fully loaded before executing any code
+document.addEventListener("DOMContentLoaded", function () {
+    // Get all the game names
+    var gameNames = document.querySelectorAll('.game-name');
+
+    // Add click event listeners to each game name
+    gameNames.forEach(function (game) {
+        game.addEventListener('click', function () {
+            // Extract the game name from the clicked element
+            var gameName = game.innerText.toLowerCase().replace(/\s+/g, '');
+
+            // Open the corresponding modal for the clicked game
+            openModal(gameName);
+        });
+    });
+});
