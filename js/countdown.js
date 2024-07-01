@@ -18,7 +18,7 @@ function displayWebsiteOneLiner() {
 }
 
 function updateCountdown() {
-    const endDate = new Date("2024-06-30T00:00:00").getTime();
+    const endDate = new Date("2024-07-25T00:00:00").getTime();
     const now = new Date().getTime();
     const timeRemaining = endDate - now;
 
