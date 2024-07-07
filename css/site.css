@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Poppins;
+    font-family: Poppins, sans-serif;
     margin: 0;
     background-color: #010101;
     color: #eee;
@@ -54,7 +54,6 @@ header .menu {
     font-weight: 500;
 }
 
-/* css slider */
 .slider {
     height: 100vh;
     margin-top: -50px;
@@ -63,7 +62,7 @@ header .menu {
 
 .slider .list .item {
     position: absolute;
-    inset: 0 0 0 0;
+    inset: 0;
     overflow: hidden;
     opacity: 0;
     transition: .5s;
@@ -73,7 +72,6 @@ header .menu {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
 }
 
 .slider .list .item::after {
@@ -85,7 +83,6 @@ header .menu {
     bottom: 0;
     background-image: linear-gradient(to top, #000 40%, transparent);
     z-index: 1;
-    /* Ensure the overlay is above the image */
 }
 
 .slider .list .item .content {
@@ -95,7 +92,6 @@ header .menu {
     width: 500px;
     max-width: 80%;
     z-index: 2;
-    /* Ensure the content is above the overlay */
 }
 
 .slider .list .item .content p:nth-child(1) {
@@ -141,7 +137,6 @@ header .menu {
 .arrows {
     position: absolute;
     bottom: 30px;
-    /* Adjust the distance from the bottom as needed */
     right: 50px;
     z-index: 100;
     opacity: 0.3;
@@ -211,16 +206,40 @@ header .menu {
     }
 
     .slider .list .item .content h2 {
-        font-size: 60px;
+        font-size: 30px;
+    }
+
+    .slider .list .item .content {
+        width: auto;
+        left: 5%;
+    }
+
+    .slider .list .item .content p:nth-child(1) {
+        font-size: 14px;
+        letter-spacing: 5px;
+    }
+
+    .slider .list .item .content p:nth-child(3) {
+        font-size: 12px;
     }
 
     .arrows {
         bottom: 10%;
-        /* Adjust the distance from the bottom as needed */
+    }
+
+    header {
+        grid-template-columns: 1fr 50px;
+    }
+
+    header .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header .menu li {
+        margin: 5px 0;
     }
 }
-
-/*footer*/
 
 footer {
     background-color: #e51b23;
@@ -234,12 +253,14 @@ footer {
     margin: auto;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .footer-left,
 .footer-center,
 .footer-right {
     flex: 1;
+    min-width: 250px;
 }
 
 .footer-left h3,
@@ -253,7 +274,6 @@ footer {
     top: 50%;
     transform: translateY(-50%);
     left: 10px;
-    /* Adjust as per your layout */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -271,9 +291,7 @@ footer {
 
 .social-icons-sidebar a:hover {
     color: #e51b23;
-    /* Change to your desired hover color */
 }
-
 
 .play-store-download,
 .watch-trailer {
@@ -299,7 +317,7 @@ footer {
 .watch-trailer:hover {
     background-color: #fff;
     color: #e51b23;
-        border: 2px solid #e51b23;
+    border: 2px solid #e51b23;
 }
 
 .button-row {
@@ -308,23 +326,6 @@ footer {
     justify-content: center;
     margin-top: 10px;
 }
-
-
-/* styles.css */
-body {
-    font-family: Arial, sans-serif;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-
-/* Add this to your existing styles */
-
-/* Contact Form Styles */
 
 .container {
     margin: 6em;
@@ -390,7 +391,6 @@ button {
     justify-content: center;
 }
 
-/* Blog Post Container */
 .blog-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -420,7 +420,6 @@ button {
     margin-bottom: 15px;
 }
 
-/* Sidebar */
 .sidebar {
     width: 25%;
     padding: 20px;
@@ -444,15 +443,72 @@ button {
     margin-bottom: 10px;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .blog-container {
-        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+        grid-template-columns: 1fr;
     }
 
     .sidebar {
         width: 100%;
         margin-left: 0;
         margin-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        grid-template-columns: 1fr;
+        grid-template-rows: 50px auto;
+    }
+
+    .slider .list .item .content h2 {
+        font-size: 24px;
+    }
+
+    .slider .list .item .content {
+        left: 5%;
+        top: 10%;
+        width: 90%;
+    }
+
+    .thumbnail {
+        height: 150px;
+        padding: 0 20px;
+    }
+
+    .thumbnail .item {
+        width: 100px;
+        height: 150px;
+    }
+
+    .contact-form {
+        padding: 15px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-left,
+    .footer-center,
+    .footer-right {
+        margin-bottom: 20px;
+    }
+
+    .social-icons-sidebar {
+        left: 0;
+        margin-left: 0;
+        width: 100%;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .social-icons-sidebar a {
+        margin: 0;
     }
 }
