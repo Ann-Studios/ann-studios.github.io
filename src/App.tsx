@@ -108,8 +108,7 @@ const App: React.FC = () => {
               <div className="content">
                 <p className="game-name">{game.title}</p>
                 <div className="button-row">
-                  <a 
-                    href="#" 
+                  <a href="../../index.html" 
                     className="watch-trailer" 
                     aria-label="trailer"
                     onClick={(e) => {
@@ -139,7 +138,7 @@ const Header: React.FC = () => {
   return (
     <header>
       <div className="logo">
-        <a href="#">Ann Studios</a>
+        <a href="../../index.html">Ann Studios</a>
       </div>
       <div className="gametab">
         <a href="./games.html" target="_blank" rel="noopener noreferrer">Games</a>
