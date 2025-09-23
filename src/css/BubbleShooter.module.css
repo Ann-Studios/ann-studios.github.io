@@ -1,0 +1,158 @@
+/* BubbleShooter.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+.container {
+    min-height: 100vh;
+    background-color: hsl(0, 0%, 0%);
+    padding: 1rem;
+}
+
+.content {
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.badge {
+    background-color: hsla(356, 85%, 51%, 0.2);
+    color: hsl(356, 85%, 51%);
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.scoreContainer {
+    text-align: right;
+}
+
+.scoreLabel {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+.scoreValue {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.levelValue {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(356, 85%, 51%);
+}
+
+.button {
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    color: hsl(356, 85%, 51%);
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: hsla(356, 85%, 51%, 0.1);
+}
+
+.canvasContainer {
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+    overflow: hidden;
+    box-shadow: 0 4px 20px hsla(0, 0%, 0%, 0.5);
+    position: relative;
+}
+
+.canvas {
+    width: 100%;
+    max-height: 70vh;
+    cursor: crosshair;
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlayContent {
+    text-align: center;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.instructions {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+}
+
+.instructionsContent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.instructionsIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: hsl(356, 85%, 51%);
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+}
+
+.instructionsTitle {
+    font-weight: 600;
+    color: hsl(0, 0%, 99.6%);
+    margin-bottom: 0.25rem;
+}
+
+.instructionsText {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .scores {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        justify-content: space-between;
+    }
+}

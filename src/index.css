@@ -1,13 +1,130 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* autoprefixer ignore next */
+/* Ann Studios brand design system 
+All colors MUST be HSL for consistency
+Brand Colors: Red (#e51b23), Black (#000000), White (#fefefe)
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 99.6%;
+
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 99.6%;
+
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 99.6%;
+
+    --primary: 356 85% 51%;
+    --primary-foreground: 0 0% 99.6%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 99.6%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 356 85% 51%;
+    --accent-foreground: 0 0% 99.6%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 99.6%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 356 85% 51%;
+
+    /* Ann Studios brand tokens */
+    --ann-red: 356 85% 51%;
+    --ann-black: 0 0% 0%;
+    --ann-white: 0 0% 99.6%;
+    --ann-red-dark: 356 85% 41%;
+    --ann-red-light: 356 85% 61%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(356, 85%, 51%), hsl(356, 85%, 41%));
+    --gradient-card: linear-gradient(145deg, hsl(0, 0%, 6%), hsl(0, 0%, 12%));
+    --gradient-hover: linear-gradient(135deg, hsl(356, 85%, 61%), hsl(356, 85%, 51%));
+    --gradient-hero: linear-gradient(135deg, hsl(356, 85%, 51%) 0%, hsl(0, 0%, 0%) 100%);
+    
+    /* Shadows and glows */
+    --shadow-gaming: 0 10px 30px -5px hsl(356, 85%, 51%, 0.3);
+    --glow-gaming: 0 0 20px hsl(356, 85%, 51%, 0.4);
+    --shadow-card: 0 4px 20px hsl(0, 0%, 0%, 0.5);
+    --shadow-red: 0 0 40px hsl(356, 85%, 51%, 0.2);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }

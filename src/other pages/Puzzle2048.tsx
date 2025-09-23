@@ -1,4 +1,4 @@
-import { Puzzle2048 } from "@/components/Puzzle2048";
+import { Puzzle2048 } from "../components/Puzzle2048";
 
 const Puzzle2048Page = () => {
   return <Puzzle2048 />;

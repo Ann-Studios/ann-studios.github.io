@@ -1,0 +1,1111 @@
+/* components.module.css - Regular CSS Styles for Game Components */
+/* This file uses regular CSS without Tailwind dependencies */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* ===== BASE STYLES ===== */
+:global(*) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:global(body) {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    line-height: 1.5;
+}
+
+/* ===== BUBBLE SHOOTER COMPONENT ===== */
+.bubble-shooter-container {
+    min-height: 100vh;
+    background-color: hsl(0, 0%, 0%);
+    padding: 1rem;
+}
+
+.bubble-shooter-content {
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bubble-shooter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.bubble-shooter-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.bubble-shooter-badge {
+    background-color: hsla(356, 85%, 51%, 0.2);
+    color: hsl(356, 85%, 51%);
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.bubble-shooter-score-container {
+    text-align: right;
+}
+
+.bubble-shooter-score-label {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+.bubble-shooter-score-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.bubble-shooter-level-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(356, 85%, 51%);
+}
+
+.bubble-shooter-button {
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    color: hsl(356, 85%, 51%);
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bubble-shooter-button:hover {
+    background-color: hsla(356, 85%, 51%, 0.1);
+}
+
+.bubble-shooter-canvas-container {
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+    overflow: hidden;
+    box-shadow: 0 4px 20px hsla(0, 0%, 0%, 0.5);
+    position: relative;
+}
+
+.bubble-shooter-canvas {
+    width: 100%;
+    max-height: 70vh;
+    cursor: crosshair;
+    display: block;
+}
+
+.bubble-shooter-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bubble-shooter-overlay-content {
+    text-align: center;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.bubble-shooter-instructions {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+}
+
+.bubble-shooter-instructions-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.bubble-shooter-instructions-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: hsl(356, 85%, 51%);
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+}
+
+.bubble-shooter-instructions-title {
+    font-weight: 600;
+    color: hsl(0, 0%, 99.6%);
+    margin-bottom: 0.25rem;
+}
+
+.bubble-shooter-instructions-text {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+/* ===== CHESS GAME COMPONENT ===== */
+.chess-container {
+    min-height: 100vh;
+    background-color: hsl(0, 0%, 0%);
+    padding: 1rem;
+}
+
+.chess-content {
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.chess-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.chess-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.chess-badge {
+    background-color: hsla(356, 85%, 51%, 0.2);
+    color: hsl(356, 85%, 51%);
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.chess-player-badge {
+    background-color: hsl(356, 85%, 51%);
+    color: hsl(0, 0%, 99.6%);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.chess-button {
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    color: hsl(356, 85%, 51%);
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chess-button:hover {
+    background-color: hsla(356, 85%, 51%, 0.1);
+}
+
+.chess-canvas-container {
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+    overflow: hidden;
+    box-shadow: 0 4px 20px hsla(0, 0%, 0%, 0.5);
+}
+
+.chess-canvas {
+    width: 100%;
+    aspect-ratio: 1/1;
+    max-height: 80vh;
+    min-height: 400px;
+    cursor: pointer;
+    display: block;
+}
+
+.chess-instructions {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+}
+
+.chess-instructions-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.chess-instructions-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: hsl(356, 85%, 51%);
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+}
+
+.chess-instructions-title {
+    font-weight: 600;
+    color: hsl(0, 0%, 99.6%);
+    margin-bottom: 0.25rem;
+}
+
+.chess-instructions-text {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+/* ===== FLAPPY BIRD COMPONENT ===== */
+.flappy-container {
+    min-height: 100vh;
+    background-color: hsl(0, 0%, 0%);
+    padding: 1rem;
+}
+
+.flappy-content {
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flappy-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.flappy-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.flappy-badge {
+    background-color: hsla(356, 85%, 51%, 0.2);
+    color: hsl(356, 85%, 51%);
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.flappy-score-container {
+    text-align: right;
+}
+
+.flappy-score-label {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+.flappy-score-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(356, 85%, 51%);
+}
+
+.flappy-highscore-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.flappy-button {
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    color: hsl(356, 85%, 51%);
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.flappy-button:hover {
+    background-color: hsla(356, 85%, 51%, 0.1);
+}
+
+.flappy-canvas-container {
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+    overflow: hidden;
+    box-shadow: 0 4px 20px hsla(0, 0%, 0%, 0.5);
+    position: relative;
+}
+
+.flappy-canvas {
+    width: 100%;
+    background: linear-gradient(to bottom, hsl(197, 71%, 73%), hsl(120, 93%, 79%));
+    display: block;
+}
+
+.flappy-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flappy-overlay-content {
+    text-align: center;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.flappy-instructions {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+}
+
+.flappy-instructions-title {
+    font-weight: 600;
+    color: hsl(0, 0%, 99.6%);
+    margin-bottom: 0.5rem;
+}
+
+.flappy-instructions-text {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+/* ===== GAME CARD COMPONENT ===== */
+.game-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, hsl(0, 0%, 6%), hsl(0, 0%, 12%));
+    border: 1px solid hsl(0, 0%, 20%);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.game-card:hover {
+    border-color: hsl(356, 85%, 51%);
+    box-shadow: 0 10px 30px -5px hsla(356, 85%, 51%, 0.3);
+    animation: glow-pulse 2s infinite;
+}
+
+.game-card-image-container {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
+}
+
+.game-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover .game-card-image {
+    transform: scale(1.1);
+}
+
+.game-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.game-card:hover .game-card-overlay {
+    opacity: 1;
+}
+
+.game-card-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, hsl(356, 85%, 51%), hsl(356, 85%, 41%));
+    color: hsl(0, 0%, 99.6%);
+    border: none;
+    box-shadow: 0 0 20px hsla(356, 85%, 51%, 0.4);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    scale: 0.9;
+}
+
+.game-card-button:hover {
+    background: linear-gradient(135deg, hsl(356, 85%, 61%), hsl(356, 85%, 51%));
+    scale: 1;
+}
+
+.game-card:hover .game-card-button {
+    opacity: 1;
+}
+
+.game-card-content {
+    padding: 1rem;
+}
+
+.game-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.game-card-badge {
+    background-color: hsla(356, 85%, 51%, 0.2);
+    color: hsl(356, 85%, 51%);
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.game-card-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+.game-card-title {
+    font-weight: 600;
+    color: hsl(0, 0%, 99.6%);
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.game-card:hover .game-card-title {
+    color: hsl(356, 85%, 51%);
+}
+
+.game-card-description {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+    margin-bottom: 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.game-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: hsl(0, 0%, 65%);
+}
+
+.game-card-play-button {
+    color: hsl(356, 85%, 51%);
+    background-color: transparent;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+:global(.game-card-play-button:hover) {
+    color: hsl(356, 85%, 61%);
+    background-color: hsla(356, 85%, 51%, 0.1);
+}
+
+:global {
+    @keyframes glow-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 10px 30px -5px hsla(356, 85%, 51%, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 30px hsla(356, 85%, 51%, 0.5);
+    }
+}
+}
+
+/* ===== GAME MODAL COMPONENT ===== */
+.game-modal-content {
+    background-color: hsl(0, 0%, 6%);
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.game-modal-content.fullscreen {
+    max-width: 100%;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+}
+
+.game-modal-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+}
+
+.game-modal-title-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.game-modal-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.game-modal-badge {
+    background-color: hsla(356, 85%, 51%, 0.2);
+    color: hsl(356, 85%, 51%);
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.game-modal-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+.game-modal-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.game-modal-button {
+    color: hsl(0, 0%, 65%);
+    background-color: transparent;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.game-modal-button:hover {
+    color: hsl(0, 0%, 99.6%);
+}
+
+.game-modal-description {
+    color: hsl(0, 0%, 65%);
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+}
+
+.game-modal-iframe-container {
+    background-color: hsl(0, 0%, 0%);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.game-modal-iframe-container.fullscreen {
+    height: calc(100vh - 120px);
+}
+
+.game-modal-iframe-container:not(.fullscreen) {
+    aspect-ratio: 16/9;
+}
+
+.game-modal-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.game-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+.game-modal-footer-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.game-modal-footer-button {
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    color: hsl(356, 85%, 51%);
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.game-modal-footer-button:hover {
+    background-color: hsla(356, 85%, 51%, 0.1);
+}
+
+.game-modal-footer-button.dark {
+    border: 1px solid hsla(356, 85%, 41%, 0.3);
+    color: hsl(356, 85%, 41%);
+}
+
+.game-modal-footer-button.dark:hover {
+    background-color: hsla(356, 85%, 41%, 0.1);
+}
+
+/* ===== PUZZLE 2048 COMPONENT ===== */
+.puzzle-container {
+    min-height: 100vh;
+    background-color: hsl(0, 0%, 0%);
+    padding: 1rem;
+}
+
+.puzzle-content {
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.puzzle-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.puzzle-title {
+    font-size: 1.875rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.puzzle-badge {
+    background-color: hsla(356, 85%, 51%, 0.2);
+    color: hsl(356, 85%, 51%);
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.puzzle-scores {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.puzzle-score-container {
+    text-align: center;
+}
+
+.puzzle-score-label {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+.puzzle-score-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(356, 85%, 51%);
+}
+
+.puzzle-highscore-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.puzzle-button {
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    color: hsl(356, 85%, 51%);
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.puzzle-button:hover {
+    background-color: hsla(356, 85%, 51%, 0.1);
+}
+
+.puzzle-board {
+    background-color: hsl(217, 16%, 75%);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.puzzle-tile {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.125rem;
+    transition: all 0.15s ease;
+}
+
+.puzzle-tile-0 {
+    background-color: hsl(220, 14%, 90%);
+}
+
+.puzzle-tile-2,
+.puzzle-tile-4 {
+    background-color: hsl(220, 14%, 96%);
+    color: hsl(220, 9%, 31%);
+}
+
+.puzzle-tile-8 {
+    background-color: hsl(25, 95%, 85%);
+    color: hsl(15, 74%, 32%);
+}
+
+.puzzle-tile-16 {
+    background-color: hsl(25, 95%, 78%);
+    color: hsl(15, 74%, 27%);
+}
+
+.puzzle-tile-32 {
+    background-color: hsl(0, 95%, 82%);
+    color: hsl(0, 74%, 30%);
+}
+
+.puzzle-tile-64 {
+    background-color: hsl(0, 95%, 74%);
+    color: hsl(0, 0%, 99.6%);
+}
+
+.puzzle-tile-128 {
+    background-color: hsl(54, 95%, 75%);
+    color: hsl(38, 74%, 29%);
+}
+
+.puzzle-tile-256 {
+    background-color: hsl(54, 95%, 65%);
+    color: hsl(38, 74%, 29%);
+}
+
+.puzzle-tile-512 {
+    background-color: hsl(54, 95%, 55%);
+    color: hsl(0, 0%, 99.6%);
+}
+
+.puzzle-tile-1024 {
+    background-color: hsl(43, 95%, 40%);
+    color: hsl(0, 0%, 99.6%);
+}
+
+.puzzle-tile-2048 {
+    background-color: hsl(356, 85%, 51%);
+    color: hsl(0, 0%, 99.6%);
+    animation: pulse 2s infinite;
+}
+
+.puzzle-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.puzzle-overlay-content {
+    text-align: center;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.puzzle-controls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    max-width: 12rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+}
+
+.puzzle-control-button {
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    color: hsl(356, 85%, 51%);
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.puzzle-control-button:hover {
+    background-color: hsla(356, 85%, 51%, 0.1);
+}
+
+.puzzle-instructions {
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+    padding: 1rem;
+}
+
+.puzzle-instructions-title {
+    font-weight: 600;
+    color: hsl(0, 0%, 99.6%);
+    margin-bottom: 0.5rem;
+}
+
+.puzzle-instructions-text {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+    margin-bottom: 0.5rem;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* ===== SNAKE GAME COMPONENT ===== */
+.snake-container {
+    min-height: 100vh;
+    background-color: hsl(0, 0%, 0%);
+    padding: 1rem;
+}
+
+.snake-content {
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.snake-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.snake-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.snake-badge {
+    background-color: hsla(356, 85%, 51%, 0.2);
+    color: hsl(356, 85%, 51%);
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.snake-score-container {
+    text-align: right;
+}
+
+.snake-score-label {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+.snake-score-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(356, 85%, 51%);
+}
+
+.snake-highscore-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.snake-button {
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    color: hsl(356, 85%, 51%);
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.snake-button:hover {
+    background-color: hsla(356, 85%, 51%, 0.1);
+}
+
+.snake-canvas-container {
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+    overflow: hidden;
+    box-shadow: 0 4px 20px hsla(0, 0%, 0%, 0.5);
+    position: relative;
+}
+
+.snake-canvas {
+    width: 100%;
+    background-color: hsl(0, 0%, 10%);
+    display: block;
+}
+
+.snake-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.snake-overlay-content {
+    text-align: center;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.snake-instructions {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+}
+
+.snake-instructions-title {
+    font-weight: 600;
+    color: hsl(0, 0%, 99.6%);
+    margin-bottom: 0.5rem;
+}
+
+.snake-instructions-text {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+
+    .bubble-shooter-header,
+    .chess-header,
+    .flappy-header,
+    .puzzle-header,
+    .snake-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .bubble-shooter-scores,
+    .chess-player-info,
+    .flappy-scores,
+    .puzzle-scores,
+    .snake-scores {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .puzzle-grid {
+        gap: 0.25rem;
+    }
+
+    .puzzle-tile {
+        height: 4rem;
+        width: 4rem;
+        font-size: 1rem;
+    }
+
+    .game-card-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+}

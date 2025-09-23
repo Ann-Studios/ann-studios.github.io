@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Games</title>
 </head>
+
 <body>
-  <div id="react-root"></div>
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <!-- Change this to match your main.tsx root element -->
+  <div id="root"></div>
+
+  <!-- Load the same bundle as your main app -->
+  <script type="module" src="./src/index.tsx"></script>
 </body>
+
 </html>

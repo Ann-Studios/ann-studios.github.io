@@ -1,6 +1,20 @@
-// App.tsx
 import React, { useState, useEffect, useCallback } from 'react';
-import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faTiktok, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faArrowLeft, faArrowRight, faVideo } from '@fortawesome/free-solid-svg-icons';
+import { Routes, Route, Link } from 'react-router-dom'; // Added Routes and Route
+import Games from './Games'; // Make sure this import is correct
+import './css/App.css';
+
+// Import your images
+import turkeyRunImage from './imgs/goose-8740266_1280.jpg';
+import shadowsImage from './imgs/knight-7169531_1280.jpg';
+import loveLetterImage from './imgs/sculpture-3448975_1280.jpg';
+import SnakeGame from './other pages/Snake';
+import BubbleShooter from './other pages/BubbleShooter';
+import FlappyBird from './other pages/FlappyBird';
+import Puzzle2048 from './other pages/Puzzle2048';
+import Chess  from './other pages/Chess';
 
 // Define types for our data
 interface Game {
@@ -21,21 +35,21 @@ const App: React.FC = () => {
       id: 1,
       title: "Turkey Run",
       description: "You're a turkey and it's Thanksgiving! Escape from humans and predators! Or else you'll be dinner!",
-      image: "imgs/goose-8740266_1280.jpg",
+      image: turkeyRunImage,
       status: "coming soon"
     },
     {
       id: 2,
       title: "Shadows of all Hallows",
       description: "The history of Halloween is reimagined with this fun game! Become the knight the town needs!",
-      image: "imgs/knight-7169531_1280.jpg",
+      image: shadowsImage,
       status: "coming soon"
     },
     {
       id: 3,
       title: "Love Letter",
       description: "It's Valentine's day and Cupid has a crush. Help him deliver the citizens' letters to their loved ones before time runs out!",
-      image: "imgs/sculpture-3448975_1280.jpg",
+      image: loveLetterImage,
       status: "coming soon"
     }
   ];
@@ -70,64 +84,79 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Header />
-      
-      <div className="slider">
-        <div className="list">
-          {games.map((game, index) => (
-            <div 
-              key={game.id} 
-              className={`item ${index === currentSlide ? 'active' : ''}`}
-            >
-              <img src={game.image} alt={game.title} />
-              <div className="content">
-                <p>{game.status}</p>
-                <h2>{game.title}</h2>
-                <p>{game.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
 
-        <div className="arrows">
-          <button id="prev" title="prev" onClick={prevSlide}>
-            <i className="fa-solid fa-arrow-left"></i>
-          </button>
-          <button id="next" title="next" onClick={nextSlide}>
-            <i className="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-
-        <div className="thumbnail">
-          {games.map((game, index) => (
-            <div 
-              key={game.id} 
-              className={`item ${index === currentSlide ? 'active' : ''}`}
-              onClick={() => setCurrentSlide(index)}
-            >
-              <img src={game.image} alt={game.title} />
-              <div className="content">
-                <p className="game-name">{game.title}</p>
-                <div className="button-row">
-                  <a href="../../index.html" 
-                    className="watch-trailer" 
-                    aria-label="trailer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      openModal(game);
-                    }}
+      {/* Add Routes to handle navigation */}
+      <Routes>
+        <Route path="/" element={
+          <>
+            <div className="slider">
+              <div className="list">
+                {games.map((game, index) => (
+                  <div
+                    key={game.id}
+                    className={`item ${index === currentSlide ? 'active' : ''}`}
                   >
-                    <i className="fa-solid fa-video"></i>
-                  </a>
-                </div>
+                    <img src={game.image} alt={game.title} />
+                    <div className="content">
+                      <p>{game.status}</p>
+                      <h2>{game.title}</h2>
+                      <p>{game.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="arrows">
+                <button id="prev" title="prev" onClick={prevSlide}>
+                  <FontAwesomeIcon icon={faArrowLeft} />
+                </button>
+                <button id="next" title="next" onClick={nextSlide}>
+                  <FontAwesomeIcon icon={faArrowRight} />
+                </button>
+              </div>
+
+              <div className="thumbnail">
+                {games.map((game, index) => (
+                  <div
+                    key={game.id}
+                    className={`item ${index === currentSlide ? 'active' : ''}`}
+                    onClick={() => setCurrentSlide(index)}
+                  >
+                    <img src={game.image} alt={game.title} />
+                    <div className="content">
+                      <p className="game-name">{game.title}</p>
+                      <div className="button-row">
+                        <a href="/"
+                          className="watch-trailer"
+                          aria-label="trailer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            openModal(game);
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faVideo} />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-      </div>
 
-      {isModalOpen && currentGame && (
-        <GameModal game={currentGame} onClose={closeModal} />
-      )}
+            {isModalOpen && currentGame && (
+              <GameModal game={currentGame} onClose={closeModal} />
+            )}
+          </>
+        } />
+        <Route path="/games" element={<Games />} />
+        <Route path="/snake" element={<SnakeGame />} />
+        {/* Add more routes as needed */}
+        <Route path="/2048" element={<Puzzle2048 />} />
+        <Route path="/flappy-bird" element={<FlappyBird />} />
+        <Route path="/bubble-shooter" element={<BubbleShooter />} />
+        <Route path="/chess" element={<Chess />} />
+        
+      </Routes>
 
       <GoogleAnalytics />
     </div>
@@ -138,20 +167,20 @@ const Header: React.FC = () => {
   return (
     <header>
       <div className="logo">
-        <a href="../../index.html">Ann Studios</a>
+        <Link to="/">Ann Studios</Link>
       </div>
       <div className="gametab">
-        <a href="./games.html" target="_blank" rel="noopener noreferrer">Games</a>
+        <Link to="/games">Games</Link>
       </div>
       <div className="social-icons-sidebar">
-        <a href="/other pages/redirects/facebook.html" rel="noopener" title="Facebook" target="_blank">
-          <i className="fab fa-facebook-f"></i>
+        <a href="https://facebook.com" rel="noopener noreferrer" title="Facebook" target="_blank">
+          <FontAwesomeIcon icon={faFacebookF} />
         </a>
-        <a href="/other pages/redirects/tiktok.html" rel="noopener" title="Tiktok" target="_blank">
-          <i className="fab fa-tiktok"></i>
+        <a href="https://tiktok.com" rel="noopener noreferrer" title="Tiktok" target="_blank">
+          <FontAwesomeIcon icon={faTiktok} />
         </a>
-        <a href="/other pages/redirects/instagram.html" rel="noopener" title="Instagram" target="_blank">
-          <i className="fab fa-instagram"></i>
+        <a href="https://instagram.com" rel="noopener noreferrer" title="Instagram" target="_blank">
+          <FontAwesomeIcon icon={faInstagram} />
         </a>
       </div>
     </header>
@@ -222,20 +251,20 @@ const GoogleAnalytics: React.FC = () => {
   return (
     <>
       <noscript>
-        <iframe 
-          src="https://www.googletagmanager.com/ns.html?id=GTM-KXT8PGL6" 
-          height="0" 
-          width="0" 
-          style={{display: 'none', visibility: 'hidden'}}
+        <iframe
+          src="https://www.googletagmanager.com/ns.html?id=GTM-KXT8PGL6"
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
           title="Google Tag Manager"
         ></iframe>
       </noscript>
       <noscript>
-        <iframe 
-          src="https://www.googletagmanager.com/ns.html?id=GTM-PF6M4VXH" 
-          height="0" 
-          width="0" 
-          style={{display: 'none', visibility: 'hidden'}}
+        <iframe
+          src="https://www.googletagmanager.com/ns.html?id=GTM-PF6M4VXH"
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
           title="Google Tag Manager"
         ></iframe>
       </noscript>

@@ -1,0 +1,266 @@
+/* Puzzle2048.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+.container {
+    min-height: 100vh;
+    background-color: hsl(0, 0%, 0%);
+    padding: 1rem;
+}
+
+.content {
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    font-size: 1.875rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.badge {
+    background-color: hsla(356, 85%, 51%, 0.2);
+    color: hsl(356, 85%, 51%);
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.scores {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.scoreContainer {
+    text-align: center;
+}
+
+.scoreLabel {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+}
+
+.scoreValue {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(356, 85%, 51%);
+}
+
+.highscoreValue {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.button {
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    color: hsl(356, 85%, 51%);
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: hsla(356, 85%, 51%, 0.1);
+}
+
+.board {
+    background-color: hsl(217, 16%, 75%);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.tile {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.125rem;
+    transition: all 0.15s ease;
+}
+
+.tile0 {
+    background-color: hsl(220, 14%, 90%);
+}
+
+.tile2,
+.tile4 {
+    background-color: hsl(220, 14%, 96%);
+    color: hsl(220, 9%, 31%);
+}
+
+.tile8 {
+    background-color: hsl(25, 95%, 85%);
+    color: hsl(15, 74%, 32%);
+}
+
+.tile16 {
+    background-color: hsl(25, 95%, 78%);
+    color: hsl(15, 74%, 27%);
+}
+
+.tile32 {
+    background-color: hsl(0, 95%, 82%);
+    color: hsl(0, 74%, 30%);
+}
+
+.tile64 {
+    background-color: hsl(0, 95%, 74%);
+    color: hsl(0, 0%, 99.6%);
+}
+
+.tile128 {
+    background-color: hsl(54, 95%, 75%);
+    color: hsl(38, 74%, 29%);
+}
+
+.tile256 {
+    background-color: hsl(54, 95%, 65%);
+    color: hsl(38, 74%, 29%);
+}
+
+.tile512 {
+    background-color: hsl(54, 95%, 55%);
+    color: hsl(0, 0%, 99.6%);
+}
+
+.tile1024 {
+    background-color: hsl(43, 95%, 40%);
+    color: hsl(0, 0%, 99.6%);
+}
+
+.tile2048 {
+    background-color: hsl(356, 85%, 51%);
+    color: hsl(0, 0%, 99.6%);
+    animation: pulse 2s infinite;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlayContent {
+    text-align: center;
+    color: hsl(0, 0%, 99.6%);
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    max-width: 12rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+}
+
+.controlButton {
+    border: 1px solid hsla(356, 85%, 51%, 0.3);
+    color: hsl(356, 85%, 51%);
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.controlButton:hover {
+    background-color: hsla(356, 85%, 51%, 0.1);
+}
+
+.instructions {
+    background-color: hsl(0, 0%, 6%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(0, 0%, 20%);
+    padding: 1rem;
+}
+
+.instructionsTitle {
+    font-weight: 600;
+    color: hsl(0, 0%, 99.6%);
+    margin-bottom: 0.5rem;
+}
+
+.instructionsText {
+    font-size: 0.875rem;
+    color: hsl(0, 0%, 65%);
+    margin-bottom: 0.5rem;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .scores {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .grid {
+        gap: 0.25rem;
+    }
+
+    .tile {
+        height: 4rem;
+        width: 4rem;
+        font-size: 1rem;
+    }
+}

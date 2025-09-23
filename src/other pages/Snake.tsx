@@ -1,4 +1,4 @@
-import { SnakeGame } from "@/components/SnakeGame";
+import { SnakeGame } from "../components/SnakeGame";
 
 const SnakePage = () => {
   return <SnakeGame />;

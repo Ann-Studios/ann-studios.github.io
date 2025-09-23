@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Badge } from '../components/ui/badge';
 import { RotateCcw, Lightbulb } from 'lucide-react';
+import '../css/ChessGame.module.css';
 
 export const ChessGame = () => {
   const mountRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<THREE.Scene>();
-  const rendererRef = useRef<THREE.WebGLRenderer>();
-  const cameraRef = useRef<THREE.PerspectiveCamera>();
-  const boardRef = useRef<THREE.Group>();
-  const piecesRef = useRef<THREE.Group>();
+  const sceneRef = useRef<THREE.Scene | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+  const boardRef = useRef<THREE.Group | null>(null);
+  const piecesRef = useRef<THREE.Group | null>(null);
   const [selectedPiece, setSelectedPiece] = useState<THREE.Object3D | null>(null);
   const [currentPlayer, setCurrentPlayer] = useState<'white' | 'black'>('white');
 
@@ -174,6 +175,7 @@ export const ChessGame = () => {
       window.removeEventListener('resize', handleResize);
       renderer.domElement.removeEventListener('click', onMouseClick);
       if (mountRef.current && renderer.domElement) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         mountRef.current.removeChild(renderer.domElement);
       }
       renderer.dispose();

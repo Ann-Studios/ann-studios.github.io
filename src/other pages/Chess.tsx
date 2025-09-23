@@ -1,4 +1,4 @@
-import { ChessGame } from "@/components/ChessGame";
+import { ChessGame } from "../components/ChessGame";
 
 const Chess = () => {
   return <ChessGame />;
