@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.87f87e88.css",
-    "main.js": "/static/js/main.6e2e4e4e.js",
+    "main.css": "/static/css/main.f5eef3c3.css",
+    "main.js": "/static/js/main.5fbcd658.js",
     "static/media/sculpture-3448975_1280.jpg": "/static/media/sculpture-3448975_1280.25d4013ac14e5c6ed92b.jpg",
     "static/media/knight-7169531_1280.jpg": "/static/media/knight-7169531_1280.8c2062eb1cb33d3c6a69.jpg",
     "static/media/goose-8740266_1280.jpg": "/static/media/goose-8740266_1280.a0e6806fddfaba762810.jpg",
@@ -15,11 +15,11 @@
     "static/media/game-snake.jpg": "/static/media/game-snake.880d84d0c1843518f56d.jpg",
     "static/media/game-chess.jpg": "/static/media/game-chess.eaa03c596cb892a7305f.jpg",
     "index.html": "/index.html",
-    "main.87f87e88.css.map": "/static/css/main.87f87e88.css.map",
-    "main.6e2e4e4e.js.map": "/static/js/main.6e2e4e4e.js.map"
+    "main.f5eef3c3.css.map": "/static/css/main.f5eef3c3.css.map",
+    "main.5fbcd658.js.map": "/static/js/main.5fbcd658.js.map"
   },
   "entrypoints": [
-    "static/css/main.87f87e88.css",
-    "static/js/main.6e2e4e4e.js"
+    "static/css/main.f5eef3c3.css",
+    "static/js/main.5fbcd658.js"
   ]
 }
