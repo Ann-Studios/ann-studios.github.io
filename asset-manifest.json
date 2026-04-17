@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.9bcc3cf1.css",
-    "main.js": "/static/js/main.844a8f6c.js",
+    "main.js": "/static/js/main.68f26f2f.js",
     "static/media/sculpture-3448975_1280.jpg": "/static/media/sculpture-3448975_1280.25d4013ac14e5c6ed92b.jpg",
     "static/media/knight-7169531_1280.jpg": "/static/media/knight-7169531_1280.8c2062eb1cb33d3c6a69.jpg",
     "static/media/goose-8740266_1280.jpg": "/static/media/goose-8740266_1280.a0e6806fddfaba762810.jpg",
@@ -16,10 +16,10 @@
     "static/media/game-chess.jpg": "/static/media/game-chess.eaa03c596cb892a7305f.jpg",
     "index.html": "/index.html",
     "main.9bcc3cf1.css.map": "/static/css/main.9bcc3cf1.css.map",
-    "main.844a8f6c.js.map": "/static/js/main.844a8f6c.js.map"
+    "main.68f26f2f.js.map": "/static/js/main.68f26f2f.js.map"
   },
   "entrypoints": [
     "static/css/main.9bcc3cf1.css",
-    "static/js/main.844a8f6c.js"
+    "static/js/main.68f26f2f.js"
   ]
 }
