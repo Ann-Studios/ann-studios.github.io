@@ -31,6 +31,29 @@
   text-align: center;
 }
 
+.games-home-link {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.games-home-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.28);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.games-home-link a:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(229, 27, 35, 0.24);
+}
+
 .hero-title {
   display: flex;
   align-items: center;

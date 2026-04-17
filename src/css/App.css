@@ -230,9 +230,8 @@ header .menu {
     color: white;
 }
 
-.gametab {
-    font-weight: bold;
-    text-align: right;
+.header-spacer {
+    width: 100%;
 }
 
 .social-icons-sidebar {

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Search, Filter, Gamepad2, Star, Play } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Search, Filter, Gamepad2, Star, Play, ArrowLeft } from "lucide-react";
 import gamePuzzle from "./assets/game-puzzle.jpg";
 import gameRacing from "./assets/game-racing.jpg";
 import gameAdventure from "./assets/game-adventure.jpg";
@@ -23,7 +24,11 @@ interface GameType {
   url: string;
 }
 
-const Games = () => {
+interface GamesProps {
+  standalone?: boolean;
+}
+
+const Games = ({ standalone = false }: GamesProps) => {
   const [selectedGame, setSelectedGame] = useState<GameType | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -77,7 +82,7 @@ const Games = () => {
       thumbnail: gameChess,
       rating: 4.9,
       plays: 87650,
-      url: `${window.location.origin}/chess`
+      url: `${window.location.origin}/play/chess`
     },
     {
       id: "flappy-bird-classic",
@@ -87,7 +92,7 @@ const Games = () => {
       thumbnail: gameFlappy,
       rating: 4.6,
       plays: 245780,
-      url: `${window.location.origin}/flappy-bird`
+      url: `${window.location.origin}/play/flappy-bird`
     },
     {
       id: "modern-snake",
@@ -97,7 +102,7 @@ const Games = () => {
       thumbnail: gameSnake,
       rating: 4.7,
       plays: 189340,
-      url: `${window.location.origin}/snake`
+      url: `${window.location.origin}/play/snake`
     },
     {
       id: "puzzle-2048",
@@ -107,7 +112,7 @@ const Games = () => {
       thumbnail: game2048,
       rating: 4.8,
       plays: 167890,
-      url: `${window.location.origin}/2048`
+      url: `${window.location.origin}/play/2048`
     },
     {
       id: "bubble-shooter-deluxe",
@@ -117,7 +122,7 @@ const Games = () => {
       thumbnail: gameBubble,
       rating: 4.5,
       plays: 134560,
-      url: `${window.location.origin}/bubble-shooter`
+      url: `${window.location.origin}/play/bubble-shooter`
     }
   ];
 
@@ -159,6 +164,14 @@ const Games = () => {
       <div className="hero-section">
         <div className="hero-overlay"></div>
         <div className="hero-content">
+          {standalone && (
+            <div className="games-home-link">
+              <Link to="/">
+                <ArrowLeft size={16} />
+                <span>Back to Ann Studios</span>
+              </Link>
+            </div>
+          )}
           <div className="hero-title">
             <Gamepad2 size={48} color="white" />
             <h1>Ann Studios Games</h1>

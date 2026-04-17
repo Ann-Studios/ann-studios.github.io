@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTiktok, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faArrowLeft, faArrowRight, faVideo } from '@fortawesome/free-solid-svg-icons';
-import { Routes, Route, Link } from 'react-router-dom'; // Added Routes and Route
+import { Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import Games from './Games'; // Make sure this import is correct
 import './css/App.css';
 
@@ -26,9 +26,11 @@ interface Game {
 }
 
 const App: React.FC = () => {
+  const location = useLocation();
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [currentGame, setCurrentGame] = useState<Game | null>(null);
+  const isStandaloneGamesSite = location.pathname === '/play' || location.pathname.startsWith('/play/');
 
   const games: Game[] = [
     {
@@ -83,7 +85,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Header />
+      {!isStandaloneGamesSite && <Header />}
 
       {/* Add Routes to handle navigation */}
       <Routes>
@@ -148,13 +150,18 @@ const App: React.FC = () => {
             )}
           </>
         } />
-        <Route path="/games" element={<Games />} />
-        <Route path="/snake" element={<SnakeGame />} />
-        {/* Add more routes as needed */}
-        <Route path="/2048" element={<Puzzle2048 />} />
-        <Route path="/flappy-bird" element={<FlappyBird />} />
-        <Route path="/bubble-shooter" element={<BubbleShooter />} />
-        <Route path="/chess" element={<Chess />} />
+        <Route path="/games" element={<Navigate to="/play" replace />} />
+        <Route path="/play" element={<Games standalone />} />
+        <Route path="/play/snake" element={<SnakeGame />} />
+        <Route path="/play/2048" element={<Puzzle2048 />} />
+        <Route path="/play/flappy-bird" element={<FlappyBird />} />
+        <Route path="/play/bubble-shooter" element={<BubbleShooter />} />
+        <Route path="/play/chess" element={<Chess />} />
+        <Route path="/snake" element={<Navigate to="/play/snake" replace />} />
+        <Route path="/2048" element={<Navigate to="/play/2048" replace />} />
+        <Route path="/flappy-bird" element={<Navigate to="/play/flappy-bird" replace />} />
+        <Route path="/bubble-shooter" element={<Navigate to="/play/bubble-shooter" replace />} />
+        <Route path="/chess" element={<Navigate to="/play/chess" replace />} />
         
       </Routes>
 
@@ -169,9 +176,7 @@ const Header: React.FC = () => {
       <div className="logo">
         <Link to="/">Ann Studios</Link>
       </div>
-      <div className="gametab">
-        <Link to="/games">Games</Link>
-      </div>
+      <div className="header-spacer" />
       <div className="social-icons-sidebar">
         <a href="https://facebook.com" rel="noopener noreferrer" title="Facebook" target="_blank">
           <FontAwesomeIcon icon={faFacebookF} />

@@ -51,7 +51,7 @@ const Index = () => {
             no downloads required. From puzzles to adventures, we've got your entertainment covered!
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/games">
+            <Link to="/play">
               <Button className="bg-gradient-primary hover:bg-gradient-hover text-white border-0 shadow-gaming-glow px-8 py-6 text-lg font-semibold transition-all hover:scale-105">
                 <Play className="w-5 h-5 mr-2" />
                 Play Games Now
@@ -133,7 +133,7 @@ const Index = () => {
                     {game.title}
                   </h3>
                   <p className="text-muted-foreground mb-4">{game.plays} plays</p>
-                  <Link to="/games">
+                  <Link to="/play">
                     <Button className="w-full bg-gradient-primary hover:bg-gradient-hover text-white border-0">
                       <Play className="w-4 h-4 mr-2" />
                       Play Now
@@ -145,7 +145,7 @@ const Index = () => {
           </div>
 
           <div className="text-center">
-            <Link to="/games">
+            <Link to="/play">
               <Button variant="outline" className="border-ann-red text-ann-red hover:bg-ann-red/10 px-8 py-3">
                 View All Games
               </Button>
@@ -164,7 +164,7 @@ const Index = () => {
             Join thousands of players enjoying our collection of premium browser games. 
             No registration required, just pure gaming fun!
           </p>
-          <Link to="/games">
+          <Link to="/play">
             <Button className="bg-white text-ann-red hover:bg-white/90 px-8 py-6 text-lg font-semibold shadow-gaming-glow">
               <Gamepad2 className="w-5 h-5 mr-2" />
               Start Playing
