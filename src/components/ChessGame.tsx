@@ -7,13 +7,19 @@ import '../css/ChessGame.module.css';
 
 export const ChessGame = () => {
   const mountRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
-  const boardRef = useRef<THREE.Group | null>(null);
-  const piecesRef = useRef<THREE.Group | null>(null);
   const [selectedPiece, setSelectedPiece] = useState<THREE.Object3D | null>(null);
   const [currentPlayer, setCurrentPlayer] = useState<'white' | 'black'>('white');
+  const selectedPieceRef = useRef<THREE.Object3D | null>(null);
+  const currentPlayerRef = useRef<'white' | 'black'>('white');
+  const piecesGroupRef = useRef<THREE.Group | null>(null);
+
+  useEffect(() => {
+    selectedPieceRef.current = selectedPiece;
+  }, [selectedPiece]);
+
+  useEffect(() => {
+    currentPlayerRef.current = currentPlayer;
+  }, [currentPlayer]);
 
   useEffect(() => {
     if (!mountRef.current) return;
@@ -21,20 +27,17 @@ export const ChessGame = () => {
     // Scene setup
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x2a2a2a);
-    sceneRef.current = scene;
 
     // Camera setup
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, mountRef.current.clientWidth / mountRef.current.clientHeight, 0.1, 1000);
     camera.position.set(0, 8, 8);
     camera.lookAt(0, 0, 0);
-    cameraRef.current = camera;
 
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    rendererRef.current = renderer;
     mountRef.current.appendChild(renderer.domElement);
 
     // Lighting
@@ -50,8 +53,7 @@ export const ChessGame = () => {
 
     // Create chess board
     const boardGroup = new THREE.Group();
-    boardRef.current = boardGroup;
-    
+
     for (let row = 0; row < 8; row++) {
       for (let col = 0; col < 8; col++) {
         const geometry = new THREE.BoxGeometry(1, 0.1, 1);
@@ -71,7 +73,7 @@ export const ChessGame = () => {
 
     // Create chess pieces
     const piecesGroup = new THREE.Group();
-    piecesRef.current = piecesGroup;
+    piecesGroupRef.current = piecesGroup;
 
     const createPiece = (type: string, color: string, x: number, z: number) => {
       const geometry = type === 'pawn' ? 
@@ -130,24 +132,27 @@ export const ChessGame = () => {
         const clickedObject = intersects[0].object;
         
         if (clickedObject.userData.type === 'piece') {
-          if (clickedObject.userData.color === currentPlayer) {
+          if (clickedObject.userData.color === currentPlayerRef.current) {
+            if (selectedPieceRef.current && selectedPieceRef.current instanceof THREE.Mesh) {
+              (selectedPieceRef.current.material as THREE.MeshLambertMaterial).emissive.setHex(0x000000);
+            }
+            selectedPieceRef.current = clickedObject;
             setSelectedPiece(clickedObject);
-            // Highlight selected piece
             if (clickedObject instanceof THREE.Mesh) {
               (clickedObject.material as THREE.MeshLambertMaterial).emissive.setHex(0x444444);
             }
           }
-        } else if (clickedObject.userData.type === 'board' && selectedPiece) {
-          // Move piece
+        } else if (clickedObject.userData.type === 'board' && selectedPieceRef.current) {
           const { row, col } = clickedObject.userData;
-          selectedPiece.position.set(col - 3.5, 0.5, row - 3.5);
-          
-          // Remove highlight
-          if (selectedPiece instanceof THREE.Mesh) {
-            (selectedPiece.material as THREE.MeshLambertMaterial).emissive.setHex(0x000000);
+          selectedPieceRef.current.position.set(col - 3.5, 0.5, row - 3.5);
+
+          if (selectedPieceRef.current instanceof THREE.Mesh) {
+            (selectedPieceRef.current.material as THREE.MeshLambertMaterial).emissive.setHex(0x000000);
           }
           setSelectedPiece(null);
-          setCurrentPlayer(currentPlayer === 'white' ? 'black' : 'white');
+          selectedPieceRef.current = null;
+          currentPlayerRef.current = currentPlayerRef.current === 'white' ? 'black' : 'white';
+          setCurrentPlayer(currentPlayerRef.current);
         }
       }
     };
@@ -155,8 +160,9 @@ export const ChessGame = () => {
     renderer.domElement.addEventListener('click', onMouseClick);
 
     // Animation loop
+    let animationFrameId = 0;
     const animate = () => {
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
       renderer.render(scene, camera);
     };
     animate();
@@ -178,15 +184,30 @@ export const ChessGame = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         mountRef.current.removeChild(renderer.domElement);
       }
+      cancelAnimationFrame(animationFrameId);
+      scene.traverse(object => {
+        if (object instanceof THREE.Mesh) {
+          object.geometry.dispose();
+          const materials = Array.isArray(object.material) ? object.material : [object.material];
+          materials.forEach(material => material.dispose());
+        }
+      });
       renderer.dispose();
     };
-  }, [selectedPiece, currentPlayer]);
+  }, []);
 
   const resetGame = () => {
+    selectedPieceRef.current = null;
+    currentPlayerRef.current = 'white';
+    piecesGroupRef.current?.children.forEach((piece) => {
+      const { x, z } = piece.userData.originalPos;
+      piece.position.set(x - 3.5, 0.5, z - 3.5);
+      if (piece instanceof THREE.Mesh) {
+        (piece.material as THREE.MeshLambertMaterial).emissive.setHex(0x000000);
+      }
+    });
     setSelectedPiece(null);
     setCurrentPlayer('white');
-    // Reload the component to reset positions
-    window.location.reload();
   };
 
   return (
@@ -194,7 +215,7 @@ export const ChessGame = () => {
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-foreground">3D Chess</h1>
+            <h2 className="text-2xl font-bold text-foreground">Chess Sandbox</h2>
             <Badge variant="secondary" className="bg-ann-red/20 text-ann-red border-ann-red/30">
               Strategy
             </Badge>
@@ -234,7 +255,7 @@ export const ChessGame = () => {
               <p className="text-sm text-muted-foreground">
                 Click on a piece to select it, then click on a square to move. 
                 This is a simplified chess game - pieces can move to any square for demonstration purposes.
-                Click and drag to rotate the camera view.
+                Chess rules, captures, and checkmate are not implemented in this demo.
               </p>
             </div>
           </div>

@@ -10,6 +10,13 @@ export const FlappyBird = () => {
   const [highScore, setHighScore] = useState(0);
   const [gameState, setGameState] = useState<'menu' | 'playing' | 'gameOver'>('menu');
   const gameRef = useRef<any>(null);
+  const gameStateRef = useRef(gameState);
+  const highScoreRef = useRef(highScore);
+
+  useEffect(() => {
+    gameStateRef.current = gameState;
+    highScoreRef.current = highScore;
+  }, [gameState, highScore]);
 
   const startGame = useCallback(() => {
     if (!canvasRef.current) return;
@@ -48,7 +55,7 @@ export const FlappyBird = () => {
     };
 
     const gameLoop = () => {
-      if (gameState !== 'playing') return;
+      if (gameStateRef.current !== 'playing') return;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -107,7 +114,7 @@ export const FlappyBird = () => {
             bird.y + bird.radius > canvas.height - pipe.bottomHeight)
         ) {
           setGameState('gameOver');
-          if (currentScore > highScore) {
+          if (currentScore > highScoreRef.current) {
             setHighScore(currentScore);
           }
           return;
@@ -120,7 +127,7 @@ export const FlappyBird = () => {
 
       if (bird.y + bird.radius > canvas.height || bird.y - bird.radius < 0) {
         setGameState('gameOver');
-        if (currentScore > highScore) {
+        if (currentScore > highScoreRef.current) {
           setHighScore(currentScore);
         }
         return;
@@ -131,12 +138,13 @@ export const FlappyBird = () => {
     };
 
     const jump = () => {
-      if (gameState === 'playing') {
+      if (gameStateRef.current === 'playing') {
         bird.velocity = bird.jump;
       }
     };
 
     const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLElement && e.target.closest('button, a, input')) return;
       if (e.code === 'Space') {
         e.preventDefault();
         jump();
@@ -145,19 +153,19 @@ export const FlappyBird = () => {
 
     const handleClick = () => jump();
 
-    canvas.addEventListener('click', handleClick);
+    canvas.addEventListener('pointerdown', handleClick);
     document.addEventListener('keydown', handleKeyPress);
 
     gameLoop();
 
     return () => {
-      canvas.removeEventListener('click', handleClick);
+      canvas.removeEventListener('pointerdown', handleClick);
       document.removeEventListener('keydown', handleKeyPress);
       if (gameRef.current) {
         cancelAnimationFrame(gameRef.current);
       }
     };
-  }, [gameState, highScore]);
+  }, []);
 
   const resetGame = () => {
     setScore(0);
@@ -174,7 +182,10 @@ export const FlappyBird = () => {
 
   useEffect(() => {
     if (gameState === 'playing') {
-      startGame();
+      return startGame();
+    }
+    if (gameRef.current) {
+      cancelAnimationFrame(gameRef.current);
     }
   }, [gameState, startGame]);
 
@@ -204,7 +215,7 @@ export const FlappyBird = () => {
         </div>
 
         <div className={styles.canvasContainer}>
-          <canvas ref={canvasRef} width={800} height={600} className={styles.canvas} />
+          <canvas ref={canvasRef} width={800} height={600} className={styles.canvas} style={{ touchAction: 'none' }} aria-label="Flappy Bird play area" />
 
           {gameState === 'menu' && (
             <div className={styles.overlay}>

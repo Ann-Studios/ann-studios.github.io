@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ed1c24" />
+    <meta name="description" content="A cinematic animated logo intro for Ann Studios." />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Ann Studios — Animated Logo Intro</title>
+  </head>
+  <body>
+    <main class="intro-stage" id="intro" aria-label="Ann Studios animated logo intro">
+      <div class="vignette" aria-hidden="true"></div>
+      <div class="film-grain" aria-hidden="true"></div>
+
+      <section class="logo-performance" role="img" aria-label="Ann Studios. A game controller and camera leap together, take a picture, and reveal the studio logo.">
+        <div class="impact-shadow" aria-hidden="true"></div>
+
+        <div class="live-lockup" aria-hidden="true">
+          <h1>Ann Studios</h1>
+
+          <div class="icon-stage">
+            <svg class="gamepad" viewBox="0 0 160 116">
+              <path d="M43 34 25 42C13 48 7 60 10 74l7 25c3 11 16 15 24 7l17-18h44l17 18c8 8 21 4 24-7l7-25c3-14-3-26-15-32l-18-8c-11-5-22-3-31 4H74c-9-7-20-9-31-4Z" />
+              <path d="M40 64h24M52 52v24" />
+              <circle cx="112" cy="59" r="6" />
+              <circle cx="129" cy="73" r="6" />
+              <path d="M66 38c2-14 25-20 30-34" />
+            </svg>
+
+            <svg class="camera" viewBox="0 0 150 112">
+              <path d="M17 37h27l10-16h42l10 16h27c8 0 14 6 14 14v43c0 8-6 14-14 14H17c-8 0-14-6-14-14V51c0-8 6-14 14-14Z" />
+              <circle class="lens-outer" cx="75" cy="73" r="27" />
+              <circle class="lens-inner" cx="75" cy="73" r="15" />
+              <path d="M112 25h20v12h-20Z" />
+              <circle cx="123" cy="52" r="4" />
+            </svg>
+
+            <span class="focus-ring ring-one"></span>
+            <span class="focus-ring ring-two"></span>
+          </div>
+        </div>
+
+        <img class="final-logo" src="./assets/ann-studios-red-logo.png" alt="Ann Studios" width="500" height="500" />
+        <div class="shutter-flash" aria-hidden="true"></div>
+      </section>
+
+      <div class="spark-field" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+
+      <p class="sequence-label" aria-hidden="true"><span>Ann Studios</span><b>Original worlds incoming</b></p>
+      <p class="sr-only" id="sequence-status" aria-live="polite">Playing Ann Studios logo intro.</p>
+      <button class="replay" id="replay" type="button" aria-describedby="replay-help">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a8 8 0 1 1 2.34 5.66M4 11V5m0 6h6" /></svg>
+        Replay
+      </button>
+      <p class="replay-help" id="replay-help">Press R or Space to replay</p>
+    </main>
+
+    <script defer src="./intro.js"></script>
+  </body>
+</html>

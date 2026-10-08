@@ -1,298 +1,69 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Search, Filter, Gamepad2, Star, Play, ArrowLeft } from "lucide-react";
-import gamePuzzle from "./assets/game-puzzle.jpg";
-import gameRacing from "./assets/game-racing.jpg";
-import gameAdventure from "./assets/game-adventure.jpg";
-import gameShooter from "./assets/game-shooter.jpg";
-import gameChess from "./assets/game-chess.jpg";
-import gameFlappy from "./assets/game-flappy.jpg";
-import gameSnake from "./assets/game-snake.jpg";
-import game2048 from "./assets/game-2048.jpg";
-import gameBubble from "./assets/game-bubble.jpg";
-import "./css/Games.css";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Search, Gamepad2, Play } from 'lucide-react';
+import gamePuzzle from './assets/game-puzzle.jpg';
+import gameAdventure from './assets/game-adventure.jpg';
+import gameShooter from './assets/game-shooter.jpg';
+import gameChess from './assets/game-chess.jpg';
+import gameFlappy from './assets/game-flappy.jpg';
+import gameSnake from './assets/game-snake.jpg';
+import game2048 from './assets/game-2048.jpg';
+import gameBubble from './assets/game-bubble.jpg';
+import gameEatYourFood from './assets/game-eat-your-food.png';
+import './css/Games.css';
+import './css/GamePage.css';
 
-// Define a type for the game object
-interface GameType {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  thumbnail: string;
-  rating: number;
-  plays: number;
-  url: string;
-}
+export const gameCatalog = [
+  { slug: 'eat-your-food', title: 'Eat Your Food!', category: 'Puzzle', image: gameEatYourFood, description: 'Swap colorful foods, trigger tasty combos, and earn three lunch stars in 25 moves.' },
+  { slug: 'snake', title: 'Modern Snake', category: 'Arcade', image: gameSnake, description: 'Eat, grow, and avoid your tail. Use the arrow keys or on-screen controls.' },
+  { slug: '2048', title: '2048', category: 'Puzzle', image: game2048, description: 'Merge matching tiles and reach 2048. Use arrow keys or the direction buttons.' },
+  { slug: 'flappy-bird', title: 'Flappy Bird', category: 'Arcade', image: gameFlappy, description: 'Tap the play area or press Space to fly through the pipes.' },
+  { slug: 'bubble-shooter', title: 'Bubble Shooter', category: 'Puzzle', image: gameBubble, description: 'Aim and shoot to match three bubbles. Clear the board to advance.' },
+  { slug: 'tic-tac-toe', title: 'Tic-Tac-Toe Duel', category: 'Strategy', image: gameChess, description: 'Play as X against the computer. Make a line of three to win.' },
+  { slug: 'memory-match', title: 'Memory Match', category: 'Puzzle', image: gamePuzzle, description: 'Find all eight matching pairs in as few flips as possible.' },
+  { slug: 'breakout', title: 'Breakout Neon', category: 'Arcade', image: gameShooter, description: 'Move the paddle with your finger, mouse, or arrow keys. Break all 54 bricks.' },
+  { slug: 'hangman', title: 'Hangman', category: 'Word', image: gameAdventure, description: 'Use the hint to guess the word before six incorrect guesses.' },
+  { slug: 'chess', title: '3D Chess Sandbox', category: 'Demo', image: gameChess, description: 'Explore a 3D board with free movement. This demo does not enforce chess rules.' },
+];
+const categories = ['all', ...Array.from(new Set(gameCatalog.map(game => game.category)))];
 
-interface GamesProps {
-  standalone?: boolean;
-}
-
-const Games = ({ standalone = false }: GamesProps) => {
-  const [selectedGame, setSelectedGame] = useState<GameType | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
-
-  const games: GameType[] = [
-    {
-      id: "puzzle-master",
-      title: "Puzzle Master",
-      description: "Challenge your mind with increasingly complex puzzles and geometric shapes. Perfect for brain training!",
-      category: "Puzzle",
-      thumbnail: gamePuzzle,
-      rating: 4.8,
-      plays: 125430,
-      url: "https://www.crazygames.com/embed/2048"
-    },
-    {
-      id: "neon-racer",
-      title: "Neon Racer",
-      description: "Race through futuristic neon tracks in this high-speed arcade racing experience with synthwave vibes.",
-      category: "Racing",
-      thumbnail: gameRacing,
-      rating: 4.6,
-      plays: 89720,
-      url: "https://www.crazygames.com/embed/moto-x3m"
-    },
-    {
-      id: "mystic-quest",
-      title: "Mystic Quest",
-      description: "Embark on an epic fantasy adventure through magical realms filled with creatures and mysteries.",
-      category: "Adventure",
-      thumbnail: gameAdventure,
-      rating: 4.9,
-      plays: 203850,
-      url: "https://www.crazygames.com/embed/fireboy-and-watergirl-forest-temple"
-    },
-    {
-      id: "space-defender",
-      title: "Space Defender",
-      description: "Defend Earth from alien invasion in this action-packed space shooter with stunning visual effects.",
-      category: "Shooter",
-      thumbnail: gameShooter,
-      rating: 4.7,
-      plays: 156920,
-      url: "https://www.crazygames.com/embed/space-invaders"
-    },
-    {
-      id: "3d-chess-master",
-      title: "3D Chess Master",
-      description: "Experience the classic strategy game in stunning 3D graphics. Challenge your mind with beautiful wooden pieces and immersive gameplay.",
-      category: "Strategy",
-      thumbnail: gameChess,
-      rating: 4.9,
-      plays: 87650,
-      url: `${window.location.origin}/play/chess`
-    },
-    {
-      id: "flappy-bird-classic",
-      title: "Flappy Bird Classic",
-      description: "The addictive arcade game that took the world by storm! Navigate through pipes and beat your high score in this pixel-perfect remake.",
-      category: "Arcade",
-      thumbnail: gameFlappy,
-      rating: 4.6,
-      plays: 245780,
-      url: `${window.location.origin}/play/flappy-bird`
-    },
-    {
-      id: "modern-snake",
-      title: "Modern Snake",
-      description: "The classic Snake game reimagined with smooth graphics and modern gameplay. Eat, grow, and avoid your own tail!",
-      category: "Arcade",
-      thumbnail: gameSnake,
-      rating: 4.7,
-      plays: 189340,
-      url: `${window.location.origin}/play/snake`
-    },
-    {
-      id: "puzzle-2048",
-      title: "2048 Puzzle",
-      description: "Slide numbered tiles to combine them and reach the elusive 2048 tile. Simple to learn but hard to master!",
-      category: "Puzzle",
-      thumbnail: game2048,
-      rating: 4.8,
-      plays: 167890,
-      url: `${window.location.origin}/play/2048`
-    },
-    {
-      id: "bubble-shooter-deluxe",
-      title: "Bubble Shooter Deluxe",
-      description: "Aim, match, and pop bubbles in this colorful puzzle game. Clear all bubbles to advance through challenging levels.",
-      category: "Puzzle",
-      thumbnail: gameBubble,
-      rating: 4.5,
-      plays: 134560,
-      url: `${window.location.origin}/play/bubble-shooter`
-    }
-  ];
-
-  const categories = ["all", "Puzzle", "Racing", "Adventure", "Shooter", "Strategy", "Arcade"];
-
-  const filteredGames = games.filter(game => {
-    const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      game.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === "all" || game.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
-  const handlePlayGame = (game: GameType) => {
-    // Create a safe object without circular references
-    const safeGame = {
-      id: game.id,
-      title: game.title,
-      description: game.description,
-      category: game.category,
-      thumbnail: game.thumbnail,
-      rating: game.rating,
-      plays: game.plays,
-      url: game.url
-    };
-
-    setSelectedGame(safeGame);
-
-    // If you want to actually navigate to the game URL:
-    // window.open(game.url, '_blank');
-  };
-
-  const closeModal = () => {
-    setSelectedGame(null);
-  };
-
+export default function Games() {
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState('all');
+  const filtered = gameCatalog.filter(game =>
+    (category === 'all' || game.category === category) &&
+    `${game.title} ${game.description}`.toLowerCase().includes(query.trim().toLowerCase())
+  );
   return (
-    <div className="games-container">
-      {/* Hero Section */}
-      <div className="hero-section">
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
-          {standalone && (
-            <div className="games-home-link">
-              <Link to="/">
-                <ArrowLeft size={16} />
-                <span>Back to Ann Studios</span>
-              </Link>
-            </div>
-          )}
-          <div className="hero-title">
-            <Gamepad2 size={48} color="white" />
-            <h1>Ann Studios Games</h1>
-          </div>
-          <p className="hero-description">
-            Discover amazing browser games, from puzzle challenges to epic adventures.
-            Play instantly without downloads!
-          </p>
-          <div className="hero-features">
-            <div className="feature-item">
-              <div className="feature-dot"></div>
-              <span>Free to Play</span>
-            </div>
-            <div className="feature-item">
-              <div className="feature-dot"></div>
-              <span>No Downloads</span>
-            </div>
-            <div className="feature-item">
-              <div className="feature-dot"></div>
-              <span>Instant Play</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Search and Filter Section */}
-      <div className="search-filter-section">
+    <main className="games-container">
+      <section className="hero-section"><div className="hero-content">
+        <div className="hero-title"><Gamepad2 size={40} aria-hidden="true" /><h1>Ann Studios Games</h1></div>
+        <p className="hero-description">Pick a game and start playing. Free browser games, with no downloads or sign-up.</p>
+      </div></section>
+      <section className="search-filter-section" aria-label="Game collection">
         <div className="search-container">
           <div className="search-input-container">
-            <Search className="search-icon" size={16} />
-            <input
-              type="text"
-              placeholder="Search games..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input"
-            />
+            <Search className="search-icon" aria-hidden="true" />
+            <input type="search" aria-label="Search games" placeholder="Search games..." value={query} onChange={event => setQuery(event.target.value)} className="search-input" />
           </div>
-          <div className="filter-container">
-            <Filter size={16} color="hsl(0, 0%, 65%)" />
-            <span className="filter-label">Categories:</span>
-            {categories.map((category) => (
-              <span
-                key={category}
-                className={`badge ${selectedCategory === category ? "badge-default" : "badge-secondary"
-                  }`}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category === "all" ? "All Games" : category}
-              </span>
-            ))}
+          <div className="filter-container" aria-label="Categories">
+            {categories.map(value => <button type="button" key={value} aria-pressed={category === value} className={`badge ${category === value ? 'badge-default' : 'badge-secondary'}`} onClick={() => setCategory(value)}>{value === 'all' ? 'All Games' : value}</button>)}
           </div>
         </div>
-
-        {/* Games Grid */}
-        {filteredGames.length > 0 ? (
-          <>
-            <div className="games-header">
-              <h2 className="games-title">
-                {selectedCategory === "all" ? "All Games" : selectedCategory}
-                <span className="games-count">({filteredGames.length})</span>
-              </h2>
+        <h2 className="games-title" aria-live="polite">{category === 'all' ? 'All Games' : category} <span className="games-count">({filtered.length})</span></h2>
+        <div className="games-grid">
+          {filtered.map(game => <article key={game.slug} className="game-card">
+            <img src={game.image} alt="" className="game-card-image" loading="lazy" />
+            <div className="game-card-content">
+              <span className="game-card-plays">{game.category}</span>
+              <h3 className="game-card-title">{game.title}</h3>
+              <p className="game-card-description">{game.description}</p>
+              <Link className="play-button" to={`/play/${game.slug}`} aria-label={`Play ${game.title}`}><Play size={16} aria-hidden="true" />{game.category === 'Demo' ? 'Explore Demo' : 'Play Game'}</Link>
             </div>
-
-            <div className="games-grid">
-              {filteredGames.map((game) => (
-                <div key={game.id} className="game-card">
-                  <img src={game.thumbnail} alt={game.title} className="game-card-image" />
-                  <div className="game-card-content">
-                    <h3 className="game-card-title">{game.title}</h3>
-                    <p className="game-card-description">{game.description}</p>
-                    <div className="game-card-footer">
-                      <div className="game-card-rating">
-                        <Star size={16} fill="currentColor" color="hsl(0, 0%, 65%)" />
-                        <span>{game.rating}</span>
-                      </div>
-                      <span className="game-card-plays">{game.plays.toLocaleString()} plays</span>
-                    </div>
-                    <button className="play-button" onClick={() => handlePlayGame(game)}>
-                      <Play size={16} style={{ marginRight: "0.25rem" }} />
-                      Play Game
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="no-games">
-            <div className="no-games-emoji">🎮</div>
-            <h3 className="no-games-title">No Games Found</h3>
-            <p className="no-games-description">
-              Try adjusting your search or selecting a different category.
-            </p>
-          </div>
-        )}
-      </div>
-
-      {/* Game Modal */}
-      {selectedGame && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeModal}>×</button>
-            <h2>{selectedGame.title}</h2>
-            <p>{selectedGame.description}</p>
-            <div className="modal-actions">
-              <button
-                className="play-button"
-                onClick={() => window.open(selectedGame.url, '_blank')}
-              >
-                Play Now
-              </button>
-              <button className="modal-close-btn" onClick={closeModal}>
-                Close
-              </button>
-            </div>
-          </div>
+          </article>)}
         </div>
-      )}
-    </div>
+        {filtered.length === 0 && <div className="no-games"><h3>No games found</h3><p>Try another search or category.</p><button className="play-button" onClick={() => { setQuery(''); setCategory('all'); }}>Show all games</button></div>}
+      </section>
+    </main>
   );
-};
-
-export default Games;
+}

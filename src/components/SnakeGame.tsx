@@ -2,7 +2,8 @@ import styles from '../css/SnakeGame.module.css';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
-import { RotateCcw, Play, Pause, Maximize, Minimize } from 'lucide-react';
+import { RotateCcw, Play, Pause } from 'lucide-react';
+import { FullscreenButton } from './ui/FullscreenButton';
 
 export const SnakeGame = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -10,7 +11,8 @@ export const SnakeGame = () => {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [gameState, setGameState] = useState<'menu' | 'playing' | 'paused' | 'gameOver'>('menu');
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [session, setSession] = useState(0);
+  const steerRef = useRef<(x: number, y: number) => void>(() => {});
   const gameRef = useRef<any>(null);
   const gameStateRef = useRef(gameState);
   const highScoreRef = useRef(highScore);
@@ -21,19 +23,6 @@ export const SnakeGame = () => {
     highScoreRef.current = highScore;
   }, [gameState, highScore]);
 
-  // Fullscreen toggle
-  const toggleFullscreen = async () => {
-    if (!containerRef.current) return;
-
-    if (!document.fullscreenElement) {
-      await containerRef.current.requestFullscreen();
-      setIsFullscreen(true);
-    } else {
-      await document.exitFullscreen();
-      setIsFullscreen(false);
-    }
-  };
-
   // Your existing startGame code unchanged...
   const startGame = useCallback(() => {
     if (!canvasRef.current) return;
@@ -42,43 +31,60 @@ export const SnakeGame = () => {
     const ctx = canvas.getContext('2d')!;
     const gridSize = 20;
     const tileCount = canvas.width / gridSize;
+    const rowCount = canvas.height / gridSize;
 
     let snake = [{ x: 10, y: 10 }];
     let direction = { x: 0, y: 0 };
+    let queuedDirection = direction;
+    let inputQueued = false;
+    steerRef.current = (x, y) => {
+      if (gameStateRef.current !== 'playing' || inputQueued || (x === -direction.x && y === -direction.y)) return;
+      queuedDirection = { x, y };
+      inputQueued = true;
+    };
     let food = { x: 15, y: 15 };
     let currentScore = 0;
     let isGameRunning = true;
 
     const generateFood = () => {
-      food = {
-        x: Math.floor(Math.random() * tileCount),
-        y: Math.floor(Math.random() * tileCount),
-      };
-      for (const segment of snake) {
-        if (segment.x === food.x && segment.y === food.y) {
-          generateFood();
-          return;
+      const empty = [];
+      for (let y = 0; y < rowCount; y++) {
+        for (let x = 0; x < tileCount; x++) {
+          if (!snake.some(segment => segment.x === x && segment.y === y)) empty.push({ x, y });
         }
       }
+      if (empty.length === 0) {
+        gameStateRef.current = 'gameOver';
+        setGameState('gameOver');
+        return;
+      }
+      food = empty[Math.floor(Math.random() * empty.length)];
     };
 
     generateFood();
 
     const gameLoop = () => {
+      if (gameStateRef.current === 'paused') {
+        gameRef.current = setTimeout(gameLoop, 150);
+        return;
+      }
       if (gameStateRef.current !== 'playing') {
         isGameRunning = false;
         return;
       }
 
+      direction = queuedDirection;
+      inputQueued = false;
       const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
 
-      if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
+      if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= rowCount) {
         setGameState('gameOver');
         if (currentScore > highScoreRef.current) setHighScore(currentScore);
         return;
       }
 
-      for (let i = 1; i < snake.length; i++) {
+      const eating = head.x === food.x && head.y === food.y;
+      for (let i = 1; i < snake.length - (eating ? 0 : 1); i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
           setGameState('gameOver');
           if (currentScore > highScoreRef.current) setHighScore(currentScore);
@@ -157,11 +163,12 @@ export const SnakeGame = () => {
 
     const handleKeyPress = (e: KeyboardEvent) => {
       if (gameStateRef.current !== 'playing') return;
+      if (e.key.startsWith('Arrow')) e.preventDefault();
       switch (e.key) {
-        case 'ArrowUp': if (direction.y !== 1) direction = { x: 0, y: -1 }; break;
-        case 'ArrowDown': if (direction.y !== -1) direction = { x: 0, y: 1 }; break;
-        case 'ArrowLeft': if (direction.x !== 1) direction = { x: -1, y: 0 }; break;
-        case 'ArrowRight': if (direction.x !== -1) direction = { x: 1, y: 0 }; break;
+        case 'ArrowUp': steerRef.current(0, -1); break;
+        case 'ArrowDown': steerRef.current(0, 1); break;
+        case 'ArrowLeft': steerRef.current(-1, 0); break;
+        case 'ArrowRight': steerRef.current(1, 0); break;
       }
     };
 
@@ -176,7 +183,7 @@ export const SnakeGame = () => {
 
   // Start the game when gameState changes to 'playing'
   useEffect(() => {
-    if (gameState === 'playing') {
+    if (session > 0) {
       const cleanup = startGame();
       return cleanup;
     }
@@ -184,15 +191,19 @@ export const SnakeGame = () => {
     return () => {
       if (gameRef.current) clearTimeout(gameRef.current);
     };
-  }, [gameState, startGame]);
+  }, [session, startGame]);
 
   const resetGame = () => {
+    setSession(0);
+    gameStateRef.current = 'menu';
     setScore(0);
     setGameState('menu');
     if (gameRef.current) clearTimeout(gameRef.current);
   };
 
   const handleStart = () => {
+    gameStateRef.current = 'playing';
+    setSession(current => current + 1);
     setGameState('playing');
     setScore(0);
   };
@@ -224,17 +235,7 @@ export const SnakeGame = () => {
                 Pause
               </Button>
             )}
-            <Button onClick={toggleFullscreen} className={styles.button}>
-              {isFullscreen ? (
-                <>
-                  <Minimize className="w-4 h-4 mr-2" /> Exit Fullscreen
-                </>
-              ) : (
-                <>
-                  <Maximize className="w-4 h-4 mr-2" /> Fullscreen
-                </>
-              )}
-            </Button>
+            <FullscreenButton containerRef={containerRef} className={styles.button} />
             <Button onClick={resetGame} className={styles.button}>
               <RotateCcw className="w-4 h-4 mr-2" />
               Reset
@@ -285,6 +286,12 @@ export const SnakeGame = () => {
           )}
         </div>
 
+        <div className="snake-controls" aria-label="Snake direction controls">
+          <Button aria-label="Move up" onClick={() => steerRef.current(0, -1)}>Up</Button>
+          <Button aria-label="Move left" onClick={() => steerRef.current(-1, 0)}>Left</Button>
+          <Button aria-label="Move down" onClick={() => steerRef.current(0, 1)}>Down</Button>
+          <Button aria-label="Move right" onClick={() => steerRef.current(1, 0)}>Right</Button>
+        </div>
         <div className={styles.instructions}>
           <h3 className={styles.instructionsTitle}>How to Play:</h3>
           <p className={styles.instructionsText}>

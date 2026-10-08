@@ -47,13 +47,21 @@ header {
     max-width: 90%;
     margin: auto;
     display: grid;
-    grid-template-columns: 50px 1fr 50px;
+    grid-template-columns: auto 1fr;
     grid-template-rows: 50px;
     justify-content: center;
     align-items: center;
     position: relative;
     z-index: 100;
     padding: 1rem 0;
+}
+
+.home-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
 }
 
 header .logo {
@@ -73,7 +81,7 @@ header .menu {
 
 .slider {
     height: 100vh;
-    margin-top: -50px;
+    margin-top: 0;
     position: relative;
 }
 
@@ -230,8 +238,14 @@ header .menu {
     color: white;
 }
 
-.header-spacer {
-    width: 100%;
+.gametab {
+    font-weight: bold;
+    text-align: right;
+}
+
+.gametab a:hover,
+.gametab a:focus-visible {
+    color: #e51b23;
 }
 
 .social-icons-sidebar {

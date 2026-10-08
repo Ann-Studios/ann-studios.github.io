@@ -15,6 +15,11 @@ import BubbleShooter from './other pages/BubbleShooter';
 import FlappyBird from './other pages/FlappyBird';
 import Puzzle2048 from './other pages/Puzzle2048';
 import Chess  from './other pages/Chess';
+import TicTacToePage from './other pages/TicTacToe';
+import MemoryMatchPage from './other pages/MemoryMatch';
+import BreakoutPage from './other pages/Breakout';
+import HangmanPage from './other pages/Hangman';
+import EatYourFoodPage from './other pages/EatYourFood';
 
 // Define types for our data
 interface Game {
@@ -30,7 +35,7 @@ const App: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [currentGame, setCurrentGame] = useState<Game | null>(null);
-  const isStandaloneGamesSite = location.pathname === '/play' || location.pathname.startsWith('/play/');
+  const isStandaloneGamesSite = location.pathname.startsWith('/play/');
 
   const games: Game[] = [
     {
@@ -151,17 +156,28 @@ const App: React.FC = () => {
           </>
         } />
         <Route path="/games" element={<Navigate to="/play" replace />} />
-        <Route path="/play" element={<Games standalone />} />
+        <Route path="/play" element={<Games />} />
         <Route path="/play/snake" element={<SnakeGame />} />
         <Route path="/play/2048" element={<Puzzle2048 />} />
         <Route path="/play/flappy-bird" element={<FlappyBird />} />
         <Route path="/play/bubble-shooter" element={<BubbleShooter />} />
         <Route path="/play/chess" element={<Chess />} />
+        <Route path="/play/tic-tac-toe" element={<TicTacToePage />} />
+        <Route path="/play/memory-match" element={<MemoryMatchPage />} />
+        <Route path="/play/breakout" element={<BreakoutPage />} />
+        <Route path="/play/hangman" element={<HangmanPage />} />
+        <Route path="/play/eat-your-food" element={<EatYourFoodPage />} />
         <Route path="/snake" element={<Navigate to="/play/snake" replace />} />
         <Route path="/2048" element={<Navigate to="/play/2048" replace />} />
         <Route path="/flappy-bird" element={<Navigate to="/play/flappy-bird" replace />} />
         <Route path="/bubble-shooter" element={<Navigate to="/play/bubble-shooter" replace />} />
         <Route path="/chess" element={<Navigate to="/play/chess" replace />} />
+        <Route path="/tic-tac-toe" element={<Navigate to="/play/tic-tac-toe" replace />} />
+        <Route path="/memory-match" element={<Navigate to="/play/memory-match" replace />} />
+        <Route path="/breakout" element={<Navigate to="/play/breakout" replace />} />
+        <Route path="/hangman" element={<Navigate to="/play/hangman" replace />} />
+        <Route path="/eat-your-food" element={<Navigate to="/play/eat-your-food" replace />} />
+        <Route path="*" element={<main className="search-filter-section"><h1>Page not found</h1><p>This address does not match a page on Ann Studios.</p><Link className="play-button" to="/play">Browse games</Link></main>} />
         
       </Routes>
 
@@ -171,12 +187,15 @@ const App: React.FC = () => {
 };
 
 const Header: React.FC = () => {
+  const location = useLocation();
   return (
-    <header>
+    <header className={location.pathname === '/' ? 'home-header' : undefined}>
       <div className="logo">
         <Link to="/">Ann Studios</Link>
       </div>
-      <div className="header-spacer" />
+      <nav className="gametab" aria-label="Main navigation">
+        <Link to="/games">Games</Link>
+      </nav>
       <div className="social-icons-sidebar">
         <a href="https://facebook.com" rel="noopener noreferrer" title="Facebook" target="_blank">
           <FontAwesomeIcon icon={faFacebookF} />

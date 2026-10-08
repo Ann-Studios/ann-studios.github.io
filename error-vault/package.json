@@ -1,0 +1,10 @@
+{
+  "name": "error-vault-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "description": "VS Code extension and desktop app for saving coding errors and solutions.",
+  "scripts": {
+    "extension:compile": "npm --prefix extension run compile",
+    "desktop:start": "npm --prefix desktop start"
+  }
+}

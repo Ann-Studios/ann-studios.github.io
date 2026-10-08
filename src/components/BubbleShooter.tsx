@@ -10,8 +10,16 @@ export const BubbleShooter = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
+  const [session, setSession] = useState(0);
   const [gameState, setGameState] = useState<'playing' | 'gameOver' | 'levelComplete'>('playing');
   const gameRef = useRef<any>(null);
+  const gameStateRef = useRef(gameState);
+  const levelRef = useRef(level);
+
+  useEffect(() => {
+    gameStateRef.current = gameState;
+    levelRef.current = level;
+  }, [gameState, level]);
 
   const startGame = useCallback(() => {
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffd93d', '#ff9ff3', '#a8e6cf'];
@@ -37,8 +45,8 @@ export const BubbleShooter = () => {
     // Initialize bubbles
     const initBubbles = () => {
       bubbles = [];
-      const usedColors = colors.slice(0, Math.min(3 + level, colors.length));
-      const startingRows = Math.min(3 + Math.floor(level / 2), 6);
+      const usedColors = colors.slice(0, Math.min(3 + levelRef.current, colors.length));
+      const startingRows = Math.min(3 + Math.floor(levelRef.current / 2), 6);
 
       for (let row = 0; row < startingRows; row++) {
         bubbles[row] = [];
@@ -58,6 +66,12 @@ export const BubbleShooter = () => {
     };
 
     initBubbles();
+    const chooseBubbleColor = () => {
+      const available = Array.from(new Set(bubbles.flat().filter(bubble => bubble.visible).map(bubble => bubble.color)));
+      return available[Math.floor(Math.random() * available.length)] || colors[0];
+    };
+    currentBubble = { color: chooseBubbleColor() };
+    nextBubble = { color: chooseBubbleColor() };
 
     // Get bubble position
     const getBubblePos = (row: number, col: number) => {
@@ -293,12 +307,12 @@ export const BubbleShooter = () => {
       ctx.fillStyle = '#fff';
       ctx.font = 'bold 16px Arial';
       ctx.fillText(`Score: ${currentScore}`, canvas.width - 120, 30);
-      ctx.fillText(`Level: ${level}`, canvas.width - 120, 55);
+      ctx.fillText(`Level: ${levelRef.current}`, canvas.width - 120, 55);
     };
 
     // Game loop
     const gameLoop = () => {
-      if (!isGameRunning || gameState !== 'playing') return;
+      if (!isGameRunning || gameStateRef.current !== 'playing') return;
 
       draw();
 
@@ -355,7 +369,7 @@ export const BubbleShooter = () => {
 
           projectile = null;
           currentBubble = nextBubble;
-          nextBubble = { color: colors[Math.floor(Math.random() * colors.length)] };
+          nextBubble = { color: chooseBubbleColor() };
         }
 
         // Bubble collision - Added null check for projectile
@@ -406,7 +420,7 @@ export const BubbleShooter = () => {
 
             projectile = null;
             currentBubble = nextBubble;
-            nextBubble = { color: colors[Math.floor(Math.random() * colors.length)] };
+            nextBubble = { color: chooseBubbleColor() };
           }
         }
       }
@@ -416,20 +430,20 @@ export const BubbleShooter = () => {
     };
 
     // Mouse controls
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
+      const mouseX = (e.clientX - rect.left) * canvas.width / rect.width;
+      const mouseY = (e.clientY - rect.top) * canvas.height / rect.height;
 
       shooter.angle = Math.atan2(mouseY - shooter.y, mouseX - shooter.x);
 
-      const minAngle = -Math.PI;
-      const maxAngle = 0;
+      const minAngle = -Math.PI + 0.1;
+      const maxAngle = -0.1;
       shooter.angle = Math.max(minAngle, Math.min(maxAngle, shooter.angle));
     };
 
     const handleClick = () => {
-      if (!projectile && gameState === 'playing' && isGameRunning) {
+      if (!projectile && gameStateRef.current === 'playing' && isGameRunning) {
         const speed = 10;
         projectile = {
           x: shooter.x,
@@ -441,23 +455,28 @@ export const BubbleShooter = () => {
       }
     };
 
-    canvas.addEventListener('mousemove', handleMouseMove);
-    canvas.addEventListener('click', handleClick);
+    const handlePointerDown = (event: PointerEvent) => {
+      handleMouseMove(event);
+      handleClick();
+    };
+    canvas.addEventListener('pointermove', handleMouseMove);
+    canvas.addEventListener('pointerdown', handlePointerDown);
 
     draw();
     gameLoop();
 
     return () => {
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      canvas.removeEventListener('click', handleClick);
+      canvas.removeEventListener('pointermove', handleMouseMove);
+      canvas.removeEventListener('pointerdown', handlePointerDown);
       if (gameRef.current) {
         cancelAnimationFrame(gameRef.current);
       }
       isGameRunning = false;
     };
-  }, [gameState, level]);
+  }, []);
 
   const resetGame = () => {
+    setSession(current => current + 1);
     setScore(0);
     setLevel(1);
     setGameState('playing');
@@ -470,9 +489,12 @@ export const BubbleShooter = () => {
 
   useEffect(() => {
     if (gameState === 'playing') {
-      startGame();
+      return startGame();
     }
-  }, [gameState, startGame]);
+    if (gameRef.current) {
+      cancelAnimationFrame(gameRef.current);
+    }
+  }, [gameState, session, startGame]);
 
   return (
     <div className={styles.container} ref={containerRef}>
@@ -510,6 +532,8 @@ export const BubbleShooter = () => {
             width={600}
             height={800}
             className={styles.canvas}
+            style={{ touchAction: 'none' }}
+            aria-label="Bubble Shooter play area"
           />
 
           {gameState === 'levelComplete' && (
