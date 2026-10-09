@@ -8,11 +8,28 @@
 export const BOARD_SIZE = 8;
 
 export const TILE_TYPES = [
+  'maize',
+  'tomato',
+  'pepper',
+  'onion',
+  'fish',
+  'beans',
+  'rice',
+  'yam',
+  'cassava',
+  'plantain',
+  'peanut',
+  'greens',
+  'palmOil',
+  'cheese',
+  'okra',
+  'flour',
+  // Legacy identifiers retained for the original standalone component, which
+  // remains in the source tree for backwards compatibility.
   'apple',
   'carrot',
   'broccoli',
   'blueberry',
-  'cheese',
   'milk',
 ] as const;
 
@@ -35,6 +52,8 @@ export type IdFactory = () => string;
 export interface RandomizedOptions {
   readonly rng?: RandomSource;
   readonly idFactory?: IdFactory;
+  /** Ingredient types that may appear while generating or refilling tiles. */
+  readonly tileTypes?: ReadonlyArray<TileType>;
 }
 
 export interface GenerateBoardOptions extends RandomizedOptions {
@@ -159,15 +178,27 @@ function makeUniqueTile(
 
 function chooseType(
   disallowed: ReadonlySet<TileType>,
+  tileTypes: ReadonlyArray<TileType>,
   rng: RandomSource,
 ): TileType {
-  const choices = TILE_TYPES.filter((type) => !disallowed.has(type));
+  const choices = tileTypes.filter((type) => !disallowed.has(type));
   return choices[randomIndex(choices.length, rng)];
+}
+
+function normalizeTileTypes(
+  tileTypes: ReadonlyArray<TileType> | undefined,
+): ReadonlyArray<TileType> {
+  const unique = Array.from(new Set(tileTypes ?? TILE_TYPES));
+  if (unique.length < 3) {
+    throw new RangeError('A match-3 board needs at least three tile types.');
+  }
+  return unique;
 }
 
 function createCandidateBoard(
   rng: RandomSource,
   idFactory: IdFactory,
+  tileTypes: ReadonlyArray<TileType>,
 ): Board {
   const board: Tile[][] = [];
   const usedIds = new Set<string>();
@@ -193,7 +224,11 @@ function createCandidateBoard(
       }
 
       nextRow.push(
-        makeUniqueTile(chooseType(disallowed, rng), usedIds, idFactory),
+        makeUniqueTile(
+          chooseType(disallowed, tileTypes, rng),
+          usedIds,
+          idFactory,
+        ),
       );
     }
 
@@ -204,43 +239,47 @@ function createCandidateBoard(
 }
 
 /** A known-solvable board used only after repeated RNG generation failures. */
-function createFallbackBoard(idFactory: IdFactory): Board {
+function createFallbackBoard(
+  idFactory: IdFactory,
+  tileTypes: ReadonlyArray<TileType>,
+): Board {
   const typeIndexes = Array.from({ length: BOARD_SIZE }, (_, row) =>
     Array.from(
       { length: BOARD_SIZE },
-      (_, col) => (row + col) % TILE_TYPES.length,
+      (_, col) => (row + col) % tileTypes.length,
     ),
   );
 
-  // Swapping (0, 1) with (1, 1) completes three apples across row zero.
+  // Swapping (0, 1) with (1, 1) completes three matching tiles across row zero.
   typeIndexes[0][2] = 0;
   typeIndexes[1][1] = 0;
 
   const usedIds = new Set<string>();
   return typeIndexes.map((row) =>
     row.map((typeIndex) =>
-      makeUniqueTile(TILE_TYPES[typeIndex], usedIds, idFactory),
+      makeUniqueTile(tileTypes[typeIndex], usedIds, idFactory),
     ),
   );
 }
 
 /**
- * Creates an 8x8 board with six food types, no pre-existing matches, and at
- * least one legal move.
+ * Creates an 8x8 board with no pre-existing matches and at least one legal
+ * move. Callers may provide a level-specific ingredient set.
  */
 export function createInitialBoard(options: GenerateBoardOptions = {}): Board {
   const rng = options.rng ?? Math.random;
   const idFactory = options.idFactory ?? defaultIdFactory;
   const maxAttempts = Math.max(1, options.maxAttempts ?? 100);
+  const tileTypes = normalizeTileTypes(options.tileTypes);
 
   for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-    const candidate = createCandidateBoard(rng, idFactory);
+    const candidate = createCandidateBoard(rng, idFactory, tileTypes);
     if (hasLegalMove(candidate)) {
       return candidate;
     }
   }
 
-  return createFallbackBoard(idFactory);
+  return createFallbackBoard(idFactory, tileTypes);
 }
 
 export function cloneBoard(board: Board): Board {
@@ -453,6 +492,7 @@ export function collapseAndRefill(
   const { rows, cols } = dimensions(board);
   const rng = options.rng ?? Math.random;
   const idFactory = options.idFactory ?? defaultIdFactory;
+  const tileTypes = normalizeTileTypes(options.tileTypes);
   const removed = new Set(
     matched
       .filter((position) => isInsideBoard(board, position))
@@ -478,7 +518,7 @@ export function collapseAndRefill(
     }
 
     while (writeRow >= 0) {
-      const type = TILE_TYPES[randomIndex(TILE_TYPES.length, rng)];
+      const type = tileTypes[randomIndex(tileTypes.length, rng)];
       result[writeRow][col] = makeUniqueTile(type, usedIds, idFactory);
       writeRow -= 1;
     }
@@ -508,6 +548,7 @@ export function reshuffleBoard(
   const rng = options.rng ?? Math.random;
   const idFactory = options.idFactory ?? defaultIdFactory;
   const maxAttempts = Math.max(1, options.maxAttempts ?? 200);
+  const tileTypes = normalizeTileTypes(options.tileTypes);
   const tiles = board.flat();
 
   for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
@@ -522,7 +563,7 @@ export function reshuffleBoard(
   }
 
   return {
-    board: createInitialBoard({ rng, idFactory }),
+    board: createInitialBoard({ rng, idFactory, tileTypes }),
     reshuffled: true,
     regenerated: true,
   };
@@ -546,6 +587,7 @@ export function resolveBoard(
 ): ResolveResult {
   const rng = options.rng ?? Math.random;
   const idFactory = options.idFactory ?? defaultIdFactory;
+  const tileTypes = normalizeTileTypes(options.tileTypes);
   const maxCascades = Math.max(1, options.maxCascades ?? 100);
   const cascades: CascadeStep[] = [];
   let current = cloneBoard(board);
@@ -558,7 +600,11 @@ export function resolveBoard(
     }
 
     const boardBefore = current;
-    current = collapseAndRefill(current, matches, { rng, idFactory });
+    current = collapseAndRefill(current, matches, {
+      rng,
+      idFactory,
+      tileTypes,
+    });
     cascades.push({
       index,
       matches,
@@ -571,13 +617,17 @@ export function resolveBoard(
   // A constant or adversarial RNG can create matches forever. Recover rather
   // than hanging a game loop, while exposing the fallback to the UI.
   if (findMatches(current).length > 0) {
-    current = createInitialBoard({ rng, idFactory });
+    current = createInitialBoard({ rng, idFactory, tileTypes });
     regenerated = true;
   }
 
   let reshuffled = false;
   if (options.ensurePlayable !== false) {
-    const playable = ensurePlayableBoard(current, { rng, idFactory });
+    const playable = ensurePlayableBoard(current, {
+      rng,
+      idFactory,
+      tileTypes,
+    });
     current = playable.board;
     reshuffled = playable.reshuffled;
     regenerated = regenerated || playable.regenerated;

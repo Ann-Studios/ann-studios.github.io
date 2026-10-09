@@ -42,6 +42,21 @@ const FOOD_INFO: Record<TileType, { name: string; color: string }> = {
   blueberry: { name: 'Blueberries', color: '#7753c7' },
   cheese: { name: 'Cheese', color: '#f6c945' },
   milk: { name: 'Milk', color: '#34b9c8' },
+  maize: { name: 'Maize', color: '#d89312' },
+  tomato: { name: 'Tomato', color: '#d94732' },
+  pepper: { name: 'Pepper', color: '#b9362b' },
+  onion: { name: 'Onion', color: '#8e5b9b' },
+  fish: { name: 'Fish', color: '#247d91' },
+  beans: { name: 'Beans', color: '#8c4d31' },
+  rice: { name: 'Rice', color: '#c28d47' },
+  yam: { name: 'Yam', color: '#8f4d65' },
+  cassava: { name: 'Cassava', color: '#8d6a36' },
+  plantain: { name: 'Plantain', color: '#9e9b19' },
+  peanut: { name: 'Groundnut', color: '#a65d2e' },
+  greens: { name: 'Leafy greens', color: '#3d8a52' },
+  palmOil: { name: 'Palm oil', color: '#d55b24' },
+  okra: { name: 'Okra', color: '#4d9348' },
+  flour: { name: 'Flour', color: '#a97e58' },
 };
 
 type SoundName = 'select' | 'swap' | 'match' | 'invalid' | 'win';

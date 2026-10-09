@@ -11,7 +11,7 @@ type GamePageShellProps = {
   children: ReactNode;
 };
 
-export function GamePageShell({ title, category, children }: GamePageShellProps) {
+export function GamePageShell({ title, category, description, children }: GamePageShellProps) {
   return (
     <div className="game-page">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-6 lg:px-6">
@@ -34,7 +34,7 @@ export function GamePageShell({ title, category, children }: GamePageShellProps)
             <div>
               <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">{title}</h1>
               <p className="mt-3 max-w-3xl text-sm leading-6 text-white/75 sm:text-base">
-                Choose your controls below and enjoy {title}.
+                {description}
               </p>
             </div>
           </div>

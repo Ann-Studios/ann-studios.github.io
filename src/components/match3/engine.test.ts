@@ -119,6 +119,28 @@ describe('match-3 engine', () => {
     expect(findLegalMoves(board).length).toBeGreaterThan(0);
   });
 
+  it('keeps generation and refills inside a level-specific ingredient set', () => {
+    const ingredients = ['maize', 'tomato', 'fish', 'rice', 'beans', 'greens'] as const;
+    const board = createInitialBoard({
+      rng: seededRandom(314),
+      tileTypes: ingredients,
+    });
+    const matchedBoard = board.map((row, rowIndex) => row.map((tile, colIndex) => (
+      rowIndex === BOARD_SIZE - 1 && colIndex < 3
+        ? { ...tile, type: ingredients[0] }
+        : tile
+    )));
+    const result = resolveBoard(matchedBoard, {
+      rng: seededRandom(2718),
+      tileTypes: ingredients,
+    });
+
+    expect(board.flat().every((tile) => ingredients.includes(tile.type as typeof ingredients[number]))).toBe(true);
+    expect(result.board.flat().every((tile) => ingredients.includes(tile.type as typeof ingredients[number]))).toBe(true);
+    expect(findMatches(board)).toEqual([]);
+    expect(hasLegalMove(board)).toBe(true);
+  });
+
   it('validates only adjacent swaps that create a match', () => {
     const board = playableFixture();
     const valid = attemptSwap(board, { row: 0, col: 1 }, { row: 1, col: 1 });

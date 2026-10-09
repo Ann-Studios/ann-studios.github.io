@@ -1,12 +1,12 @@
-import { EatYourFoodGame } from '../components/EatYourFoodGame';
+import { EatYourFoodGame } from '../components/eat-your-food/BeninCampaignGame';
 import { GamePageShell } from '../components/GamePageShell';
 
 const EatYourFoodPage = () => {
   return (
     <GamePageShell
       title="Eat Your Food!"
-      category="Puzzle"
-      description="Swap bright, healthy foods, build tasty cascades, and fill all three lunch stars before your moves run out."
+      category="Match-3 adventure"
+      description="Play as a lunch lady in Benin: collect ingredients, learn local meal sequences, and serve a new school lunch on every level."
     >
       <EatYourFoodGame />
     </GamePageShell>

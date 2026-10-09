@@ -9,12 +9,12 @@ import gameFlappy from './assets/game-flappy.jpg';
 import gameSnake from './assets/game-snake.jpg';
 import game2048 from './assets/game-2048.jpg';
 import gameBubble from './assets/game-bubble.jpg';
-import gameEatYourFood from './assets/game-eat-your-food.png';
+import gameEatYourFood from './assets/game-eat-your-food-benin.png';
 import './css/Games.css';
 import './css/GamePage.css';
 
 export const gameCatalog = [
-  { slug: 'eat-your-food', title: 'Eat Your Food!', category: 'Puzzle', image: gameEatYourFood, description: 'Swap colorful foods, trigger tasty combos, and earn three lunch stars in 25 moves.' },
+  { slug: 'eat-your-food', title: 'Eat Your Food!', category: 'Adventure', image: gameEatYourFood, description: 'Run a Benin school canteen: match ingredients, learn 20 West African meals, and serve the students.' },
   { slug: 'snake', title: 'Modern Snake', category: 'Arcade', image: gameSnake, description: 'Eat, grow, and avoid your tail. Use the arrow keys or on-screen controls.' },
   { slug: '2048', title: '2048', category: 'Puzzle', image: game2048, description: 'Merge matching tiles and reach 2048. Use arrow keys or the direction buttons.' },
   { slug: 'flappy-bird', title: 'Flappy Bird', category: 'Arcade', image: gameFlappy, description: 'Tap the play area or press Space to fly through the pipes.' },
