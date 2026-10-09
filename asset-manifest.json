@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.e2989784.css",
-    "main.js": "/static/js/main.b789256d.js",
-    "static/media/game-eat-your-food.png": "/static/media/game-eat-your-food.16608e5588b5ee415bcd.png",
+    "main.css": "/static/css/main.b98ed12b.css",
+    "main.js": "/static/js/main.fcfa166b.js",
+    "static/media/game-eat-your-food-benin.png": "/static/media/game-eat-your-food-benin.6bb322709fa3a8788411.png",
     "static/media/sculpture-3448975_1280.jpg": "/static/media/sculpture-3448975_1280.25d4013ac14e5c6ed92b.jpg",
     "static/media/knight-7169531_1280.jpg": "/static/media/knight-7169531_1280.8c2062eb1cb33d3c6a69.jpg",
     "static/media/goose-8740266_1280.jpg": "/static/media/goose-8740266_1280.a0e6806fddfaba762810.jpg",
@@ -15,11 +15,11 @@
     "static/media/game-snake.jpg": "/static/media/game-snake.880d84d0c1843518f56d.jpg",
     "static/media/game-chess.jpg": "/static/media/game-chess.eaa03c596cb892a7305f.jpg",
     "index.html": "/index.html",
-    "main.e2989784.css.map": "/static/css/main.e2989784.css.map",
-    "main.b789256d.js.map": "/static/js/main.b789256d.js.map"
+    "main.b98ed12b.css.map": "/static/css/main.b98ed12b.css.map",
+    "main.fcfa166b.js.map": "/static/js/main.fcfa166b.js.map"
   },
   "entrypoints": [
-    "static/css/main.e2989784.css",
-    "static/js/main.b789256d.js"
+    "static/css/main.b98ed12b.css",
+    "static/js/main.fcfa166b.js"
   ]
 }
